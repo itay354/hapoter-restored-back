@@ -97,7 +97,7 @@ const Hero: React.FC = () => {
                   onLoadStart={() => console.log('Video loading started')}
                   onCanPlay={() => console.log('Video can start playing')}
                 >
-                  <source src="/videos/compressed-hapoter-video.mp4" type="video/mp4" />
+                  <source src="/videos/compressed-hapoter-video copy.mp4" type="video/mp4" />
                   הדפדפן שלך לא תומך בפורמט הוידאו.
                 </video>
                 
