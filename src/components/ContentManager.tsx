@@ -24,7 +24,7 @@ const defaultContent: ContentConfig = {
   aboutDescription: 'מתמחה בעיצוב, תוכן ופתרונות יצירתיים המשלבים טכנולוגיית בינה מלאכותית מתקדמת',
   images: {
     hero: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1",
-    about: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1",
+    about: "/assets/itay-koronio.jpg",
     // רק תמונות חיוניות - צמצום משמעותי
     image1: "/assets/tanti model before.jpg",
     image2: "/assets/tanti model after.jpg",
