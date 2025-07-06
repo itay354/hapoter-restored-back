@@ -78,7 +78,7 @@ const Hero: React.FC = () => {
           <div className="lg:col-span-6 lg:order-2">
             <div className="relative">
               {/* וידאו הפותר - מנהל לחוץ שהופך למבסוט */}
-              <div className="rounded-xl overflow-hidden w-full max-w-2xl mx-auto shadow-xl relative">
+              <div className="rounded-xl overflow-hidden w-full max-w-2xl mx-auto shadow-xl relative aspect-video">
                 <video 
                   ref={videoRef}
                   autoPlay
@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
                   preload="metadata"
                   loading="lazy"
                   poster="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1"
-                  className="w-full h-auto object-cover rounded-xl"
+                  className="w-full h-full object-cover rounded-xl"
                   style={{
                     filter: 'brightness(1.05) contrast(1.02)',
                     backgroundColor: 'white'
