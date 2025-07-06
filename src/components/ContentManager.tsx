@@ -23,30 +23,16 @@ const defaultContent: ContentConfig = {
   aboutTitle: 'מיהו הפותר?',
   aboutDescription: 'מתמחה בעיצוב, תוכן ופתרונות יצירתיים המשלבים טכנולוגיית בינה מלאכותית מתקדמת',
   images: {
-    hero: "/assets/generated_image (1).png",
-    about: "/assets/itay-koronio.jpg",
-    presentation1: "https://images.pexels.com/photos/7014337/pexels-photo-7014337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    presentation2: "https://images.pexels.com/photos/8867434/pexels-photo-8867434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    presentation3: "https://images.pexels.com/photos/6804079/pexels-photo-6804079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    presentation4: "https://images.pexels.com/photos/5926387/pexels-photo-5926387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    // התמונות הראשיות - לפני ואחרי - החזרתי לנתיבים הנכונים
+    hero: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1",
+    about: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1",
+    // רק תמונות חיוניות - צמצום משמעותי
     image1: "/assets/tanti model before.jpg",
     image2: "/assets/tanti model after.jpg",
-    image3: "https://images.pexels.com/photos/4049991/pexels-photo-4049991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    image4: "https://images.pexels.com/photos/4050000/pexels-photo-4050000.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    video1: "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    video2: "https://images.pexels.com/photos/7232397/pexels-photo-7232397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    // תמונות חדשות לטאב וידאו - אנימציה - תיקון הנתיבים!
-    video3: "https://images.pexels.com/photos/3184434/pexels-photo-3184434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // תמונה לרעיונאות ותוכן - אדם כותב רעיונות
-    video4: "/assets/tanti model after.jpg", // תמונה 2 של ה-Tanti Model (אחרי)
-    // תמונות יצירת מוקאפים
+    // תמונות מוקאפים - רק הכרחיות
     before1: "/assets/player.jpg", // לפני - דגם בסיסי
     after1: "/assets/generated_image.png", // אחרי - מוקאפ מעוצב
-    before2: "/assets/slide2-before.png/Slide2.PNG", // מצגת TriCo (לפני)
-    after2: "/assets/slide2-after.png/Slide2.PNG", // מצגת TriCo (אחרי)
-    // התמונות החדשות של Be There - עודכן לתמונות החדשות
-    before3: "/assets/be there - before.png", // לפני - סקיצה חדשה של Be There
-    after3: "/assets/be there after.png", // אחרי - מוקאפ חדש של Be There
+    before3: "/assets/be there - before.png",
+    after3: "/assets/be there after.png",
   }
 };
 
@@ -222,6 +208,15 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   useEffect(() => {
     const loadContent = async () => {
       setIsLoading(true);
+      
+      // ניקוי אוטומטי של דאטהביס ישן לביצועים טובים יותר
+      try {
+        await deleteDatabase();
+        console.log('Database cleared for optimization');
+      } catch (e) {
+        console.log('Database clear not needed');
+      }
+      
       try {
         // יצירת promise שיסתיים תוך 5 שניות
         const loadingPromise = (async () => {
@@ -458,7 +453,7 @@ const AdminLoginForm: React.FC = () => {
 export const useContent = () => React.useContext(ContentContext);
 
 // פונקציה להקטנת גודל תמונה (שומרת על איכות גבוהה יותר)
-const resizeImage = (imageUrl: string, maxWidth: number, maxHeight: number, quality: number = 0.9): Promise<string> => {
+const resizeImage = (imageUrl: string, maxWidth: number, maxHeight: number, quality: number = 0.7): Promise<string> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
@@ -466,7 +461,7 @@ const resizeImage = (imageUrl: string, maxWidth: number, maxHeight: number, qual
       let height = img.height;
       
       // בדיקה האם התמונה גדולה מדי ודורשת הקטנה
-      let needsResize = width > maxWidth || height > maxHeight;
+      let needsResize = width > maxWidth || height > maxHeight || img.src.startsWith('data:');
       
       // אם התמונה קטנה מספיק, נחזיר אותה כמו שהיא
       if (!needsResize) {
@@ -533,9 +528,9 @@ const ImageUploader: React.FC<{
   imageUrl, 
   label, 
   onUpload, 
-  maxWidth = 1920, 
-  maxHeight = 1080, 
-  quality = 0.85,
+  maxWidth = 800, 
+  maxHeight = 600, 
+  quality = 0.6,
   isBeforeAfter = false
 }) => {
   const [isUploading, setIsUploading] = useState(false);
@@ -577,7 +572,7 @@ const ImageUploader: React.FC<{
             setProgress(60); // התחלת עיבוד התמונה
             
             // שמירה על איכות גבוהה יותר עבור תמונות לפני/אחרי
-            const resizeQuality = isBeforeAfter ? 0.92 : quality;
+            const resizeQuality = isBeforeAfter ? 0.75 : quality;
             
             // הקטנת התמונה לפני שמירה תוך שמירה על איכות גבוהה
             const resizedImage = await resizeImage(reader.result, maxWidth, maxHeight, resizeQuality);
@@ -1021,9 +1016,9 @@ const ContentManager: React.FC = () => {
               imageUrl={content.images.before1}
               label="לפני - דגם בסיסי"
               onUpload={updateImage || (() => {})}
-              maxWidth={2560}
-              maxHeight={1440}
-              quality={0.92}
+              maxWidth={800}
+              maxHeight={600}
+              quality={0.7}
               isBeforeAfter={true}
             />
             <ImageUploader 
@@ -1031,40 +1026,13 @@ const ContentManager: React.FC = () => {
               imageUrl={content.images.after1}
               label="אחרי - מוקאפ מעוצב"
               onUpload={updateImage || (() => {})}
-              maxWidth={2560}
-              maxHeight={1440}
-              quality={0.92}
+              maxWidth={800}
+              maxHeight={600}
+              quality={0.7}
               isBeforeAfter={true}
             />
             <p className="text-xs text-gray-500 mt-1">
               הדוגמה מציגה איך אנחנו יוצרים מוקאפים מקצועיים ומרשימים למוצרים שונים
-            </p>
-          </div>
-          
-          <div className="border-2 border-royal-100 rounded-lg p-3 mb-4">
-            <h5 className="font-medium text-sm mb-2 text-royal-600">מצגת TriCo (במצגות)</h5>
-            <ImageUploader 
-              imageKey="before2" 
-              imageUrl={content.images.before2}
-              label="לפני - מצגת בסיסית"
-              onUpload={updateImage || (() => {})}
-              maxWidth={2560}
-              maxHeight={1440}
-              quality={0.92}
-              isBeforeAfter={true}
-            />
-            <ImageUploader 
-              imageKey="after2" 
-              imageUrl={content.images.after2}
-              label="אחרי - מצגת משופרת"
-              onUpload={updateImage || (() => {})}
-              maxWidth={2560}
-              maxHeight={1440}
-              quality={0.92}
-              isBeforeAfter={true}
-            />
-            <p className="text-xs text-gray-500 mt-1">
-              דוגמה של שיפור מצגת עסקית - מופיעה בטאב מצגות
             </p>
           </div>
           
@@ -1075,9 +1043,9 @@ const ContentManager: React.FC = () => {
               imageUrl={content.images.before3}
               label="לפני - סקיצה חדשה של Be There"
               onUpload={updateImage || (() => {})}
-              maxWidth={2560}
-              maxHeight={1440}
-              quality={0.92}
+              maxWidth={800}
+              maxHeight={600}
+              quality={0.7}
               isBeforeAfter={true}
             />
             <ImageUploader 
@@ -1085,9 +1053,9 @@ const ContentManager: React.FC = () => {
               imageUrl={content.images.after3}
               label="אחרי - מוקאפ חדש של Be There"
               onUpload={updateImage || (() => {})}
-              maxWidth={2560}
-              maxHeight={1440}
-              quality={0.92}
+              maxWidth={800}
+              maxHeight={600}
+              quality={0.7}
               isBeforeAfter={true}
             />
             <p className="text-xs text-gray-500 mt-1">
@@ -1096,9 +1064,9 @@ const ContentManager: React.FC = () => {
           </div>
           
           <div className="text-xs text-gray-500 mt-2">
-            <p>אחסון: IndexedDB (עד ~50MB תלוי בדפדפן)</p>
-            <p>איכות תמונה: 92% (גבוהה)</p>
-            <p>רזולוציה מקסימלית: 2560x1440</p>
+            <p>אחסון: IndexedDB (עד ~10MB מותאם לביצועים)</p>
+            <p>איכות תמונה: 70% (מותאם למהירות)</p>
+            <p>רזולוציה מקסימלית: 800x600</p>
           </div>
         </div>
       )}
@@ -1153,7 +1121,7 @@ const ContentManager: React.FC = () => {
           
           <div className="pt-4 border-t">
             <p className="text-xs text-gray-500">
-              נפח אחסון: <span className="font-medium">~50MB</span> (IndexedDB)
+              נפח אחסון: <span className="font-medium">~10MB</span> (IndexedDB)
             </p>
             <p className="text-xs text-gray-500">
               מידע נשמר בדפדפן המקומי ונשמר בין סשנים

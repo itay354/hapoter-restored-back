@@ -35,9 +35,9 @@ const Services: React.FC = () => {
         ],
         images: [
           content.images.presentation1 || "https://images.pexels.com/photos/7014337/pexels-photo-7014337.jpeg",
-          content.images.presentation2 || "https://images.pexels.com/photos/8867434/pexels-photo-8867434.jpeg"
+          "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
         ],
-        videoUrl: "https://player.vimeo.com/video/76979871?background=1"
+        videoUrl: ""
       }
     },
     {
@@ -56,9 +56,9 @@ const Services: React.FC = () => {
         ],
         images: [
           content.images.image1 || "/assets/model-before.jpg",
-          content.images.video1 || "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg"
+          "https://images.pexels.com/photos/274937/pexels-photo-274937.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
         ],
-        videoUrl: "https://player.vimeo.com/video/225408543?background=1"
+        videoUrl: ""
       }
     },
     {
@@ -77,10 +77,10 @@ const Services: React.FC = () => {
           "ניתוח נתונים ומחקר לפיתוח רעיונות מבוססי מידע"
         ],
         images: [
-          content.images.video3 || "https://images.pexels.com/photos/3184434/pexels-photo-3184434.jpeg",
-          content.images.video4 || "/assets/model-after.jpg"
+          "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
+          "https://images.pexels.com/photos/3184434/pexels-photo-3184434.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
         ],
-        videoUrl: "https://player.vimeo.com/video/225408543?background=1"
+        videoUrl: ""
       }
     },
     {
@@ -98,10 +98,10 @@ const Services: React.FC = () => {
           "המלצות מפורטות לשיפור חווית המשתמש"
         ],
         images: [
-          "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          "https://images.pexels.com/photos/6444/pencil-typography-black-design.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
+          "https://images.pexels.com/photos/6444/pencil-typography-black-design.jpg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
         ],
-        videoUrl: "https://player.vimeo.com/video/370756449?background=1"
+        videoUrl: ""
       }
     }
   ];
