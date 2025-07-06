@@ -78,7 +78,7 @@ const Hero: React.FC = () => {
           <div className="lg:col-span-6 lg:order-2">
             <div className="relative">
               {/* וידאו הפותר - מנהל לחוץ שהופך למבסוט */}
-              <div className="rounded-xl overflow-hidden w-full max-w-2xl mx-auto shadow-xl relative aspect-video">
+              <div className="rounded-xl overflow-hidden w-full mx-auto shadow-xl relative" style={{aspectRatio: '16/10', minHeight: '400px'}}>
                 <video 
                   ref={videoRef}
                   autoPlay
