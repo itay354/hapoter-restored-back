@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* הסרת פס גלילה אבל שמירה על אפשרות הגלילה */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+@keyframes shrink-up {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) translateY(-20px);
+    opacity: 0.9;
+  }
+}
+
+.animate-shrink-up {
+  animation: shrink-up 0.5s forwards;
+}
+
+@keyframes pulse-attention {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(79, 84, 255, 0);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(79, 84, 255, 0.3);
+  }
+}
+
+.animate-pulse-attention {
+  animation: pulse-attention 2s infinite;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.8s ease-out forwards;
+}
+
+/* 3D effect classes */
+.shadow-3d {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-3d-light {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.rotate-3d {
+  transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
+  transition: transform 0.3s ease;
+}
+
+.rotate-3d:hover {
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+}
+
+/* אנימציות נוספות עבור אפקט מנהל לחוץ/מבסוט */
+@keyframes pulse-slow {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 5s infinite;
+}
+
+@keyframes ping-slow {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 3s ease-in-out infinite;
+}
+
+@keyframes sweep {
+  0% {
+    left: -100%;
+    opacity: 0.7;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-sweep {
+  animation: sweep 3s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* Force RTL direction for proper Hebrew rendering */
+html[dir="rtl"] body {
+  text-align: right;
+  direction: rtl;
+  unicode-bidi: embed;
+}
