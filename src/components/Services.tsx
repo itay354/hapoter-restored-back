@@ -21,8 +21,11 @@ const Services: React.FC = () => {
         const cardBottom = rect.bottom - containerRect.top;
         const cardWidth = rect.width;
         
+        // בדיקה אם זו קוביה תחתונה (אינדקסים 2,3)
+        const isBottomRow = selectedService >= 2;
+        
         setPopupPosition({
-          top: cardBottom + 20, // 20px מרווח מתחת לקוביה
+          top: isBottomRow ? cardBottom - 450 : cardBottom + 30, // למעלה או למטה + מרווח גדול יותר
           left: cardLeft,
           width: cardWidth
         });
@@ -239,12 +242,19 @@ const Services: React.FC = () => {
               left: `${popupPosition.left}px`,
               width: `${Math.max(popupPosition.width, 600)}px`,
               maxWidth: '90vw',
-              maxHeight: '500px'
+              maxHeight: '400px',
+              marginBottom: '100px' // מרווח תחתון גדול כדי למנוע חיתוך
             }}
           >
-            {/* חץ מחבר למעלה */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 -top-4 z-30">
-              <div className="w-8 h-8 bg-white transform rotate-45 border-t border-l border-gray-200 shadow-lg"></div>
+            {/* חץ מחבר דינמי */}
+            <div className={`absolute left-1/2 transform -translate-x-1/2 z-30 ${
+              selectedService >= 2 ? '-bottom-4' : '-top-4'
+            }`}>
+              <div className={`w-8 h-8 bg-white transform rotate-45 shadow-lg ${
+                selectedService >= 2 
+                  ? 'border-b border-r border-gray-200' 
+                  : 'border-t border-l border-gray-200'
+              }`}></div>
             </div>
 
             {/* 3D Decorative elements */}
@@ -257,10 +267,10 @@ const Services: React.FC = () => {
                 e.stopPropagation();
                 closeDetailedView();
               }}
-              className="absolute top-4 right-4 w-10 h-10 bg-coral-500 text-white rounded-full flex items-center justify-center z-10 hover:bg-coral-600 transition-colors shadow-lg"
+              className="absolute -top-3 -right-3 w-12 h-12 bg-coral-500 text-white rounded-full flex items-center justify-center z-50 hover:bg-coral-600 transition-colors shadow-xl border-4 border-white"
               aria-label="סגור"
             >
-              <X className="h-5 w-5" />
+              <X className="h-6 w-6" />
             </button>
             
             <div className="relative z-10 h-full overflow-y-auto">
