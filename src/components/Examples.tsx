@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useContent } from './ContentManager';
 import ExampleCard from './ExampleCard';
-import LogoCarousel from './LogoCarousel';
 
 const Examples: React.FC = () => {
   const { content } = useContent();
@@ -185,7 +184,93 @@ const Examples: React.FC = () => {
         {/* תוכן הטאבים */}
         {activeTab === 'logos' ? (
           <div className="max-w-4xl mx-auto">
-            <LogoCarousel />
+            <div className="bg-white rounded-xl shadow-xl p-8 relative">
+              {/* 3D Card effects */}
+              <div className="absolute -top-4 -right-4 w-full h-full bg-royal-200 opacity-10 rounded-xl transform rotate-1"></div>
+              <div className="absolute -bottom-4 -left-4 w-full h-full bg-coral-200 opacity-10 rounded-xl transform -rotate-1"></div>
+              
+              <div className="relative z-10">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    לוגואים שעיצבנו
+                  </h3>
+                  <p className="text-gray-600">
+                    דוגמאות מעבודות הלוגו שלנו עבור לקוחות שונים
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
+                      <img
+                        src="/assets/logo-transparent-garry.svg"
+                        alt="גארי גלינר - לוגו"
+                        className="max-w-16 max-h-16 object-contain"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                    <h4 className="font-semibold text-sm text-center">גארי גלינר</h4>
+                    <p className="text-xs text-gray-500 text-center">מאמן כושר</p>
+                  </div>
+                  
+                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
+                      <img
+                        src="/assets/-a-modern-and-professional-logo-for--koronyo-studi.svg"
+                        alt="סטודיו קורוניו - לוגו"
+                        className="max-w-16 max-h-16 object-contain"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                    <h4 className="font-semibold text-sm text-center">סטודיו קורוניו</h4>
+                    <p className="text-xs text-gray-500 text-center">עיצוב ופיתוח</p>
+                  </div>
+                  
+                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
+                      <img
+                        src="/assets/logo-itay.png"
+                        alt="איתי קורוניו - לוגו"
+                        className="max-w-16 max-h-16 object-contain"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                    <h4 className="font-semibold text-sm text-center">איתי קורוניו</h4>
+                    <p className="text-xs text-gray-500 text-center">יועץ UX</p>
+                  </div>
+                  
+                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
+                      <div className="w-16 h-16 bg-gradient-to-br from-royal-500 to-coral-500 rounded-lg flex items-center justify-center">
+                        <span className="text-white font-bold text-xs">עוד</span>
+                      </div>
+                    </div>
+                    <h4 className="font-semibold text-sm text-center">פרויקטים נוספים</h4>
+                    <p className="text-xs text-gray-500 text-center">בקרוב...</p>
+                  </div>
+                </div>
+                
+                <div className="text-center mt-8">
+                  <a 
+                    href="#contact" 
+                    className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-6 py-3 rounded-lg transition-colors relative"
+                  >
+                    {/* 3D Button effect */}
+                    <div className="absolute inset-0 bg-royal-800 opacity-0 hover:opacity-30 rounded-lg transform translate-y-1"></div>
+                    <span className="relative">רוצים לוגו דומה? צרו קשר</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

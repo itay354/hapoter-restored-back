@@ -88,7 +88,7 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
           <div className="absolute -bottom-2 -left-2 w-full h-full bg-coral-200 opacity-0 group-hover:opacity-10 transition-opacity rounded-lg transform group-hover:-rotate-1"></div>
           
           {/* Image containers with high-quality loading */}
-          <div className="absolute top-0 left-0 w-full h-full bg-white flex items-center justify-center">
+          <div className="absolute top-0 left-0 w-full h-full bg-white flex items-center justify-center select-none">
             {/* Loading placeholder */}
             <div className="animate-pulse flex flex-col items-center justify-center">
               <div className="h-8 w-8 bg-gray-300 rounded-full mb-2"></div>
@@ -97,11 +97,11 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
           </div>
           
           {/* Before Image - Right side (visible past the divider) */}
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white p-4">
+          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white p-4 select-none pointer-events-none">
             <img 
               src={example.before} 
               alt={`${example.title} - לפני`} 
-              className="max-w-full max-h-full object-contain bg-white"
+              className="max-w-full max-h-full object-contain bg-white select-none pointer-events-none"
               style={{
                 filter: 'brightness(1.05) contrast(1.02)',
                 backgroundColor: 'white'
@@ -116,7 +116,7 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
           
           {/* After Image - Left side (masked by the divider) - הגדלת התמונה */}
           <div 
-            className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white p-1"
+            className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white p-1 select-none pointer-events-none"
             style={{ 
               clipPath: `polygon(0 0, ${dividerPosition}% 0, ${dividerPosition}% 100%, 0 100%)`
             }}
@@ -124,7 +124,7 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
             <img 
               src={example.after} 
               alt={`${example.title} - אחרי`} 
-              className="max-w-full max-h-full object-contain bg-white"
+              className="max-w-full max-h-full object-contain bg-white select-none pointer-events-none"
               style={{
                 filter: 'brightness(1.05) contrast(1.02)',
                 backgroundColor: 'white'
@@ -139,7 +139,7 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
 
           {/* Draggable divider line */}
           <div 
-            className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize transition-all duration-100 flex items-center justify-center"
+            className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize transition-all duration-100 flex items-center justify-center pointer-events-auto select-none"
             style={{ 
               left: `${dividerPosition}%`,
               transform: 'translateX(-50%)',
@@ -148,7 +148,7 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
             }}
           >
             {/* Add draggable handle indicator */}
-            <div className="h-12 w-12 rounded-full bg-white shadow-md flex items-center justify-center opacity-80 transform hover:scale-110 transition-all">
+            <div className="h-12 w-12 rounded-full bg-white shadow-md flex items-center justify-center opacity-80 transform hover:scale-110 transition-all select-none pointer-events-auto">
               <div className="flex">
                 <ArrowLeft className="h-4 w-4 text-gray-700" />
                 <ArrowRight className="h-4 w-4 text-gray-700" />
@@ -157,16 +157,16 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
           </div>
 
           {/* Before/After labels */}
-          <div className="absolute bottom-4 right-4 px-4 py-2 bg-coral-500 text-white rounded-full text-sm font-medium z-20">
+          <div className="absolute bottom-4 right-4 px-4 py-2 bg-coral-500 text-white rounded-full text-sm font-medium z-20 select-none pointer-events-none">
             לפני
           </div>
           
-          <div className="absolute bottom-4 left-4 px-4 py-2 bg-royal-600 text-white rounded-full text-sm font-medium z-20">
+          <div className="absolute bottom-4 left-4 px-4 py-2 bg-royal-600 text-white rounded-full text-sm font-medium z-20 select-none pointer-events-none">
             אחרי
           </div>
 
           {/* Drag instruction */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full whitespace-nowrap z-20">
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full whitespace-nowrap z-20 select-none pointer-events-none">
             גררו את הקו לצפייה בשינוי
           </div>
         </div>

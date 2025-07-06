@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
     target.onerror = null; // מניעת לופ אין-סופי
     
     // נסה את הלוגו החלופי
-    if (target.src.includes('ChatGPT LOGO 2 copy.png')) {
+    if (target.src.includes('new hapoter logo transparent.png')) {
       target.src = "/assets/ChatGPT LOGO.png";
     } else {
       // אם גם זה נכשל, השתמש בטקסט
@@ -68,9 +68,9 @@ const Footer: React.FC = () => {
           <div>
             <div className="flex items-center mb-4">
               <img 
-                src="/assets/ChatGPT LOGO 2 copy.png" 
+                src="/assets/new hapoter logo transparent.png" 
                 alt="הפותר - לוגו חדש" 
-                className="h-20 w-auto ml-3 brightness-0 invert brightness-150 contrast-125 drop-shadow-md"
+                className="h-18 w-auto ml-3 drop-shadow-md"
                 onError={handleLogoError}
               />
             </div>
