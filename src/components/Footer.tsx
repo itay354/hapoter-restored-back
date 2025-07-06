@@ -66,13 +66,16 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           <div>
-            <div className="flex items-center mb-4">
+            <div className="flex flex-col items-start mb-4">
               <img 
                 src="/assets/new hapoter logo transparent.png" 
                 alt="הפותר - לוגו חדש" 
                 className="h-20 w-auto ml-3 drop-shadow-md"
                 onError={handleLogoError}
               />
+              <div className="text-white text-sm font-medium mt-1 ml-3" style={{width: 'auto', maxWidth: '80px'}}>
+                הפותר
+              </div>
             </div>
             <p className="text-gray-400 mb-6">
               סוגרים לך פינה בעבודות עיצוב ותוכן דחופות באמצעות טכנולוגיית AI מתקדמת.
