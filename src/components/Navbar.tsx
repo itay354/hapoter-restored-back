@@ -27,8 +27,8 @@ const Navbar: React.FC = () => {
     target.onerror = null; // מניעת לופ אין-סופי
     
     // נסה את הלוגו החלופי
-    if (target.src.includes('hapoter-custom-logo.svg')) {
-      target.src = "/assets/logo-itay.png";
+    if (target.src.includes('new hapoter logo transparent.png')) {
+      target.src = "/assets/ChatGPT LOGO.png";
     } else {
       // אם גם זה נכשל, השתמש בטקסט
       target.style.display = 'none';
@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center">
           <a href="#" className="flex flex-col items-center justify-center">
             <img 
-              src="/assets/hapoter-custom-logo.svg" 
+              src="/assets/new hapoter logo transparent.png" 
               alt="הפותר - לוגו" 
               className="h-14 w-auto drop-shadow-sm"
               onError={handleLogoError}
