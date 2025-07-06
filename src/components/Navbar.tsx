@@ -71,7 +71,7 @@ const Navbar: React.FC = () => {
             <div 
               className="text-royal-600 font-medium text-center"
               style={{ 
-                marginTop: '3px',
+                marginTop: '1px',
                 fontSize: '12px',
                 letterSpacing: '0.5px',
                 width: '56px' // מתאים לרוחב הלוגו (h-14 = 56px)
