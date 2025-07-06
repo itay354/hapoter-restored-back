@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center">
           <a href="#" className="flex flex-col items-center justify-center">
             <img 
-              src="/assets/new hapoter logo transparent.png" 
+              src="/assets/hapoter-custom-logo.svg" 
               alt="הפותר - לוגו" 
               className="h-14 w-auto drop-shadow-sm"
               onError={handleLogoError}

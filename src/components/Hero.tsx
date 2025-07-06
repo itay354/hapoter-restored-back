@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
                   }}
                   onError={handleVideoError}
                 >
-                  <source src="/videos/compressed-hapoter-video.mp4" type="video/mp4" />
+                  <source src="/videos/first-model.mp4" type="video/mp4" />
                   הדפדפן שלך לא תומך בפורמט הוידאו.
                 </video>
                 
