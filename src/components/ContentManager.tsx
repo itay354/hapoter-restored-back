@@ -666,12 +666,41 @@ const ImageUploader: React.FC<{
         ) : error ? (
           <div className="text-red-500 text-sm">{error}</div>
         ) : (
-          <img 
-            src={imageUrl} 
-            alt={label}
-            className="max-w-full max-h-full object-contain"
-            onError={handleImageError}
-          />
+          <>
+            {imageUrl.includes('.mp4') ? (
+              <video 
+                src={imageUrl}
+                className="max-w-full max-h-full object-contain"
+                controls={false}
+                muted
+                preload="none"
+                poster="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
+                onError={(e) => {
+                  const target = e.target as HTMLVideoElement;
+                  console.error('Video preview failed:', imageUrl);
+                  target.style.display = 'none';
+                  
+                  // הצג טקסט fallback
+                  const parent = target.parentElement;
+                  if (parent && !parent.querySelector('.video-fallback-text')) {
+                    const fallbackDiv = document.createElement('div');
+                    fallbackDiv.className = 'video-fallback-text flex items-center justify-center w-full h-full bg-gray-100 text-gray-500 text-sm rounded';
+                    fallbackDiv.innerHTML = '🎬<br>קובץ וידאו';
+                    parent.appendChild(fallbackDiv);
+                  }
+                }}
+              >
+                קובץ וידאו לא נטען
+              </video>
+            ) : (
+              <img 
+                src={imageUrl} 
+                alt={label}
+                className="max-w-full max-h-full object-contain"
+                onError={handleImageError}
+              />
+            )}
+          </>
         )}
       </div>
     </div>

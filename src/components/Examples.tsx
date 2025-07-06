@@ -300,7 +300,9 @@ const Examples: React.FC = () => {
                         
                         <video 
                           controls
-                          preload="metadata"
+                          preload="none"
+                          loading="lazy"
+                          poster={example.before}
                           className="w-full h-full object-contain"
                           onLoadedMetadata={(e) => {
                             // הגדרת הפריים השלישי כ-thumbnail
