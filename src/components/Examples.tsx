@@ -319,15 +319,6 @@ const Examples: React.FC = () => {
                           הדפדפן שלך לא תומך בפורמט הוידאו.
                         </video>
 
-                        {/* Video description overlay */}
-                        <div className="absolute bottom-4 left-4 right-4 bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg">
-                          <p className="text-sm">
-                            {index === 0 ? 
-                              '🎬 Tanti Model - וידאו מקורי של הפרויקט' :
-                              '🎬 Tanti Model Project - הדמיית פרויקט חדשני'
-                            }
-                          </p>
-                        </div>
                       </div>
                     </div>
                   </div>
