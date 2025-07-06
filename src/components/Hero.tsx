@@ -85,12 +85,17 @@ const Hero: React.FC = () => {
                   muted={isMuted}
                   loop
                   playsInline
+                  preload="metadata"
+                  loading="lazy"
+                  poster="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1"
                   className="w-full h-auto object-cover rounded-xl"
                   style={{
                     filter: 'brightness(1.05) contrast(1.02)',
                     backgroundColor: 'white'
                   }}
                   onError={handleVideoError}
+                  onLoadStart={() => console.log('Video loading started')}
+                  onCanPlay={() => console.log('Video can start playing')}
                 >
                   <source src="/videos/compressed-hapoter-video.mp4" type="video/mp4" />
                   הדפדפן שלך לא תומך בפורמט הוידאו.
