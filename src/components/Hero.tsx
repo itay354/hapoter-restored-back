@@ -11,19 +11,17 @@ const Hero: React.FC = () => {
   // פונקציה לטיפול בוידאו שלא נטען
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
     const target = e.target as HTMLVideoElement;
-    const parent = target.parentElement;
+    console.log('Video failed to load, showing fallback image');
     
+    // הסתרת הוידאו
+    target.style.display = 'none';
+    
+    // הצגת תמונת fallback
+    const parent = target.parentElement;
     if (parent) {
-      // הסתרת הוידאו ויצירת תמונת fallback
-      target.style.display = 'none';
-      
-      if (!parent.querySelector('.video-fallback')) {
-        const fallbackImg = document.createElement('img');
-        fallbackImg.className = 'video-fallback w-full h-auto';
-        fallbackImg.src = content.images.hero || "/assets/generated_image (1).png";
-        fallbackImg.alt = "המנהל שהופך ממבולבל למבסוט";
-        fallbackImg.style.filter = 'brightness(1.05) contrast(1.02)';
-        parent.appendChild(fallbackImg);
+      const fallbackImg = parent.querySelector('.video-fallback') as HTMLImageElement;
+      if (fallbackImg) {
+        fallbackImg.classList.remove('hidden');
       }
     }
   };
@@ -78,23 +76,38 @@ const Hero: React.FC = () => {
           <div className="lg:col-span-6 lg:order-2">
             <div className="relative">
               {/* וידאו הפותר - מנהל לחוץ שהופך למבסוט */}
-              <div className="rounded-xl overflow-hidden w-full max-w-2xl mx-auto shadow-xl relative">
+              <div className="rounded-xl overflow-hidden w-full max-w-2xl mx-auto shadow-xl relative bg-white">
                 <video 
                   ref={videoRef}
                   autoPlay
                   muted={isMuted}
                   loop
                   playsInline
+                  preload="metadata"
                   className="w-full h-auto object-cover rounded-xl"
                   style={{
                     filter: 'brightness(1.05) contrast(1.02)',
                     backgroundColor: 'white'
                   }}
                   onError={handleVideoError}
+                  onLoadStart={() => console.log('Video loading started')}
+                  onCanPlay={() => console.log('Video can play')}
                 >
                   <source src="/videos/compressed hapoter video.mp4" type="video/mp4" />
+                  <source src="/videos/hapoter-video.mp4" type="video/mp4" />
                   הדפדפן שלך לא תומך בפורמט הוידאו.
                 </video>
+                
+                {/* תמונת fallback במקרה שהוידאו לא נטען */}
+                <img 
+                  src={content.images.hero || "/assets/generated_image (1).png"}
+                  alt="הפותר - מנהל שהופך ממבולבל למבסוט"
+                  className="w-full h-auto object-cover rounded-xl absolute top-0 left-0 video-fallback hidden"
+                  style={{
+                    filter: 'brightness(1.05) contrast(1.02)',
+                    backgroundColor: 'white'
+                  }}
+                />
                 
                 {/* כפתור קול/השתקה */}
                 <button
@@ -115,7 +128,7 @@ const Hero: React.FC = () => {
                 </button>
                 
                 {/* Overlay למקרה שהוידאו לא נטען */}
-                <div className="absolute inset-0 bg-black bg-opacity-10 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-black bg-opacity-5 pointer-events-none rounded-xl"></div>
                 
                 {/* Magic Sparkle Effect - אפקט ניצוצות קסם */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
@@ -137,12 +150,12 @@ const Hero: React.FC = () => {
                 </div>
                 
                 {/* Play/Pause Indicator */}
-                <div className="absolute -bottom-8 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
+                <div className="absolute bottom-2 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
                   🎬 הפותר בפעולה
                 </div>
                 
                 {/* אינדיקטור מצב קול */}
-                <div className="absolute -bottom-8 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
+                <div className="absolute bottom-2 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
                   {isMuted ? "🔇" : "🔊"}
                 </div>
               </div>
