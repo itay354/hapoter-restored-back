@@ -27,8 +27,8 @@ const Navbar: React.FC = () => {
     target.onerror = null; // מניעת לופ אין-סופי
     
     // נסה את הלוגו החלופי
-    if (target.src.includes('new hapoter logo transparent.png')) {
-      target.src = "/assets/ChatGPT LOGO.png";
+    if (target.src.includes('hapoter-custom-logo.svg')) {
+      target.src = "/assets/logo-itay.png";
     } else {
       // אם גם זה נכשל, השתמש בטקסט
       target.style.display = 'none';

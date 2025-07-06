@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
       if (!parent.querySelector('.video-fallback')) {
         const fallbackImg = document.createElement('img');
         fallbackImg.className = 'video-fallback w-full h-auto';
-        fallbackImg.src = content.images.hero || "/assets/generated_image (1).png";
+        fallbackImg.src = content.images.hero || "/assets/generated_image.png";
         fallbackImg.alt = "המנהל שהופך ממבולבל למבסוט";
         fallbackImg.style.filter = 'brightness(1.05) contrast(1.02)';
         parent.appendChild(fallbackImg);
