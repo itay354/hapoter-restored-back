@@ -65,21 +65,9 @@ const Navbar: React.FC = () => {
             <img 
               src="/assets/new hapoter logo transparent.png" 
               alt="הפותר - לוגו" 
-              className="h-14 w-auto drop-shadow-sm"
+              className="h-16 w-auto drop-shadow-sm"
               onError={handleLogoError}
             />
-            <div 
-              className="text-royal-600 font-medium text-center leading-none"
-              style={{ 
-                marginTop: '-2px',
-                fontSize: '11px',
-                letterSpacing: '0.3px',
-                width: '56px',
-                textAlign: 'center'
-              }}
-            >
-              הפותר
-            </div>
           </a>
         </div>
         

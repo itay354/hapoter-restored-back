@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
               <img 
                 src="/assets/new hapoter logo transparent.png" 
                 alt="הפותר - לוגו חדש" 
-                className="h-18 w-auto ml-3 drop-shadow-md"
+                className="h-20 w-auto ml-3 drop-shadow-md"
                 onError={handleLogoError}
               />
             </div>
