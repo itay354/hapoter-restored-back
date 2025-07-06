@@ -66,14 +66,14 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           <div>
-            <div className="flex flex-col items-start mb-4">
+            <div className="flex flex-col items-center mb-4 w-fit">
               <img 
                 src="/assets/new hapoter logo transparent.png" 
                 alt="הפותר - לוגו חדש" 
-                className="h-20 w-auto ml-3 drop-shadow-md"
+                className="h-20 w-auto drop-shadow-md"
                 onError={handleLogoError}
               />
-              <div className="text-white text-sm font-medium mt-1 mr-3 text-center" style={{width: '80px'}}>
+              <div className="text-white text-sm font-medium mt-1 text-center">
                 הפותר
               </div>
             </div>
