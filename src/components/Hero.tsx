@@ -78,7 +78,7 @@ const Hero: React.FC = () => {
           <div className="lg:col-span-6 lg:order-2">
             <div className="relative">
               {/* וידאו הפותר - מנהל לחוץ שהופך למבסוט */}
-              <div className="rounded-xl overflow-hidden w-full max-w-lg mx-auto shadow-xl relative">
+              <div className="rounded-xl overflow-hidden w-full max-w-2xl mx-auto shadow-xl relative">
                 <video 
                   ref={videoRef}
                   autoPlay
@@ -137,12 +137,12 @@ const Hero: React.FC = () => {
                 </div>
                 
                 {/* Play/Pause Indicator */}
-                <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
+                <div className="absolute -bottom-8 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
                   🎬 הפותר בפעולה
                 </div>
                 
                 {/* אינדיקטור מצב קול */}
-                <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
+                <div className="absolute -bottom-8 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
                   {isMuted ? "🔇" : "🔊"}
                 </div>
               </div>
