@@ -23,7 +23,7 @@ const Services: React.FC = () => {
       icon: <PresentationIcon className="h-12 w-12 text-white" />,
       title: 'עיצוב מצגות',
       description: 'מצגות עסקיות, לימודיות ואישיות בעיצוב מקצועי ובהתאמה אישית.',
-      image: content.images.presentation1 || "https://images.pexels.com/photos/7014337/pexels-photo-7014337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      image: "https://images.pexels.com/photos/274937/pexels-photo-274937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       bgColor: 'bg-coral-500',
       detailedContent: {
         description: 'אנו מתמחים ביצירת מצגות עסקיות ואקדמיות בעיצוב מקצועי, מרשים ומותאם אישית. באמצעות שילוב AI עם מומחיות עיצובית, אנו יוצרים מצגות שלא רק נראות מצוין, אלא גם מעבירות את המסר שלך בצורה אפקטיבית.',
@@ -44,7 +44,7 @@ const Services: React.FC = () => {
       icon: <ImageIcon className="h-12 w-12 text-white" />,
       title: 'הפקת תמונות ווידאו',
       description: 'עיבוד תמונות, עריכת וידאו, אנימציות ואפקטים ויזואליים איכותיים ומקצועיים.',
-      image: content.images.image1 || "/assets/model-before.jpg",
+      image: "https://images.pexels.com/photos/8369648/pexels-photo-8369648.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       bgColor: 'bg-royal-600',
       detailedContent: {
         description: 'שירותי הפקת תמונות ווידאו שלנו מציעים מגוון רחב של פתרונות, החל מעיבוד תמונות, רטוש והסרת רקע ועד לעריכת וידאו מקצועית והוספת אנימציות. בעזרת טכנולוגיית AI מתקדמת, אנחנו יכולים להפוך כל תוכן ויזואלי למושלם במהירות וביעילות.',
@@ -65,7 +65,7 @@ const Services: React.FC = () => {
       icon: <Lightbulb className="h-12 w-12 text-white" />,
       title: 'רעיונות ותוכן',
       description: 'ייעוץ יצירתי, פיתוח קונספטים ורעיונות, וכתיבת תוכן מקצועי.',
-      image: content.images.video3 || "https://images.pexels.com/photos/3184434/pexels-photo-3184434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      image: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       bgColor: 'bg-royal-600',
       detailedContent: {
         description: 'שירותי הרעיונות והתוכן שלנו מסייעים לך להגיע לרעיונות חדשניים ולהציג אותם בצורה מקצועית ומשכנעת. אנחנו משלבים חשיבה יצירתית עם ניתוח נתונים ומחקר כדי לפתח קונספטים שמדברים לקהל היעד שלך.',
