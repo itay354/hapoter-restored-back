@@ -61,20 +61,21 @@ const Navbar: React.FC = () => {
       
       <div className="container mx-auto px-4 flex justify-between items-center relative z-10">
         <div className="flex items-center">
-          <a href="#" className="flex flex-col items-center">
+          <a href="#" className="flex flex-col items-center justify-center">
             <img 
               src="/assets/new hapoter logo transparent.png" 
               alt="הפותר - לוגו" 
-              className="h-14 w-auto ml-2 drop-shadow-sm"
+              className="h-14 w-auto drop-shadow-sm"
               onError={handleLogoError}
             />
             <div 
-              className="text-royal-600 font-medium text-center"
+              className="text-royal-600 font-medium text-center leading-none"
               style={{ 
-                marginTop: '1px',
-                fontSize: '12px',
-                letterSpacing: '0.5px',
-                width: '56px' // מתאים לרוחב הלוגו (h-14 = 56px)
+                marginTop: '-2px',
+                fontSize: '11px',
+                letterSpacing: '0.3px',
+                width: '56px',
+                textAlign: 'center'
               }}
             >
               הפותר
