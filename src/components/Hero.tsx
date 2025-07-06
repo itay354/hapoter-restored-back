@@ -1,9 +1,12 @@
 import React from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
 import { Zap, Clock, Award } from 'lucide-react';
 import { useContent } from './ContentManager';
 
 const Hero: React.FC = () => {
   const { content } = useContent();
+  const [isMuted, setIsMuted] = React.useState(true);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
   
   // פונקציה לטיפול בוידאו שלא נטען
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
@@ -22,6 +25,15 @@ const Hero: React.FC = () => {
         fallbackImg.style.filter = 'brightness(1.05) contrast(1.02)';
         parent.appendChild(fallbackImg);
       }
+    }
+  };
+  
+  // פונקציה לטיפול בכפתור הקול
+  const toggleMute = () => {
+    if (videoRef.current) {
+      const newMutedState = !isMuted;
+      videoRef.current.muted = newMutedState;
+      setIsMuted(newMutedState);
     }
   };
   
@@ -66,13 +78,14 @@ const Hero: React.FC = () => {
           <div className="lg:col-span-6 lg:order-2">
             <div className="relative">
               {/* וידאו הפותר - מנהל לחוץ שהופך למבסוט */}
-              <div className="rounded-xl overflow-hidden w-full max-w-md mx-auto shadow-xl relative">
+              <div className="rounded-xl overflow-hidden w-full max-w-lg mx-auto shadow-xl relative">
                 <video 
+                  ref={videoRef}
                   autoPlay
-                  muted
+                  muted={isMuted}
                   loop
                   playsInline
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover rounded-xl"
                   style={{
                     filter: 'brightness(1.05) contrast(1.02)',
                     backgroundColor: 'white'
@@ -82,6 +95,24 @@ const Hero: React.FC = () => {
                   <source src="/videos/compressed hapoter video.mp4" type="video/mp4" />
                   הדפדפן שלך לא תומך בפורמט הוידאו.
                 </video>
+                
+                {/* כפתור קול/השתקה */}
+                <button
+                  onClick={toggleMute}
+                  className="absolute top-4 left-4 w-12 h-12 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full flex items-center justify-center transition-all duration-300 z-30 group"
+                  aria-label={isMuted ? "הפעל קול" : "השתק קול"}
+                >
+                  {/* 3D Button effect */}
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 rounded-full transform group-hover:translate-y-0.5"></div>
+                  
+                  <div className="relative">
+                    {isMuted ? (
+                      <VolumeX className="h-5 w-5" />
+                    ) : (
+                      <Volume2 className="h-5 w-5" />
+                    )}
+                  </div>
+                </button>
                 
                 {/* Overlay למקרה שהוידאו לא נטען */}
                 <div className="absolute inset-0 bg-black bg-opacity-10 pointer-events-none"></div>
@@ -106,8 +137,13 @@ const Hero: React.FC = () => {
                 </div>
                 
                 {/* Play/Pause Indicator */}
-                <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70">
+                <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
                   🎬 הפותר בפעולה
+                </div>
+                
+                {/* אינדיקטור מצב קול */}
+                <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70 pointer-events-none">
+                  {isMuted ? "🔇" : "🔊"}
                 </div>
               </div>
               
