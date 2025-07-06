@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
                 className="h-20 w-auto ml-3 drop-shadow-md"
                 onError={handleLogoError}
               />
-              <div className="text-white text-sm font-medium mt-1 ml-3" style={{width: 'auto', maxWidth: '80px'}}>
+              <div className="text-white text-sm font-medium mt-1 mr-3 text-center" style={{width: '80px'}}>
                 הפותר
               </div>
             </div>
