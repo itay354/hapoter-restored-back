@@ -5,14 +5,24 @@ import { useContent } from './ContentManager';
 const Hero: React.FC = () => {
   const { content } = useContent();
   
-  // פונקציה לטיפול בתמונות שלא נטענות
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const target = e.target as HTMLImageElement;
-    target.onerror = null; // מניעת לופ אין-סופי
+  // פונקציה לטיפול בוידאו שלא נטען
+  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const target = e.target as HTMLVideoElement;
+    const parent = target.parentElement;
     
-    // fallback לתמונה מתאימה לעמוד הראשי
-    target.src = "https://images.pexels.com/photos/3755761/pexels-photo-3755761.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
-    target.alt = "תמונת ברירת מחדל - הפותר";
+    if (parent) {
+      // הסתרת הוידאו ויצירת תמונת fallback
+      target.style.display = 'none';
+      
+      if (!parent.querySelector('.video-fallback')) {
+        const fallbackImg = document.createElement('img');
+        fallbackImg.className = 'video-fallback w-full h-auto';
+        fallbackImg.src = content.images.hero || "/assets/generated_image (1).png";
+        fallbackImg.alt = "המנהל שהופך ממבולבל למבסוט";
+        fallbackImg.style.filter = 'brightness(1.05) contrast(1.02)';
+        parent.appendChild(fallbackImg);
+      }
+    }
   };
   
   return (
@@ -55,17 +65,29 @@ const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-6 lg:order-2">
             <div className="relative">
-              {/* המנהל המשתנה - תמונה מסיקוונס מנהל לחוץ שהופך למנהל מבסוט */}
-              <div className="rounded-xl overflow-hidden w-full max-w-md mx-auto shadow-xl">
-                <img 
-                  src={content.images.hero || "/assets/generated_image (1).png"} 
-                  alt="המנהל שהופך ממבולבל למבסוט" 
-                  className="w-full h-auto"
-                  onError={handleImageError}
-                />
+              {/* וידאו הפותר - מנהל לחוץ שהופך למבסוט */}
+              <div className="rounded-xl overflow-hidden w-full max-w-md mx-auto shadow-xl relative">
+                <video 
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-auto object-cover"
+                  style={{
+                    filter: 'brightness(1.05) contrast(1.02)',
+                    backgroundColor: 'white'
+                  }}
+                  onError={handleVideoError}
+                >
+                  <source src="/videos/compressed hapoter video.mp4" type="video/mp4" />
+                  הדפדפן שלך לא תומך בפורמט הוידאו.
+                </video>
+                
+                {/* Overlay למקרה שהוידאו לא נטען */}
+                <div className="absolute inset-0 bg-black bg-opacity-10 pointer-events-none"></div>
                 
                 {/* Magic Sparkle Effect - אפקט ניצוצות קסם */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                   <div className="w-40 h-40 bg-royal-200 rounded-full opacity-0 animate-ping-slow"></div>
                 </div>
                 
@@ -81,6 +103,11 @@ const Hero: React.FC = () => {
                   <div className="absolute top-1/4 left-0 w-1/2 h-16 bg-royal-200 opacity-10 rounded-full transform -skew-x-30 animate-sweep"></div>
                   <div className="absolute top-1/2 left-0 w-1/2 h-12 bg-royal-200 opacity-15 rounded-full transform -skew-x-30 animate-sweep" style={{animationDelay: '1s'}}></div>
                   <div className="absolute top-3/4 left-0 w-1/2 h-8 bg-royal-200 opacity-20 rounded-full transform -skew-x-30 animate-sweep" style={{animationDelay: '2s'}}></div>
+                </div>
+                
+                {/* Play/Pause Indicator */}
+                <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs opacity-70">
+                  🎬 הפותר בפעולה
                 </div>
               </div>
               
