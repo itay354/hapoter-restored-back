@@ -5,6 +5,8 @@ import { X, Upload, Save, Lock } from 'lucide-react';
 interface ContentData {
   title: string;
   description: string;
+  aboutTitle: string;
+  aboutDescription: string;
   images: {
     [key: string]: string;
   };
@@ -20,6 +22,8 @@ interface ContentContextType {
 const defaultContent: ContentData = {
   title: 'הפותר - סוגרים לך פינה בעבודות עיצוב ותוכן דחופות',
   description: 'אנחנו מספקים פתרונות עיצוב, מחקר, תוכן ואנליזה מהירים ואיכותיים באמצעות טכנולוגיית AI מתקדמת.',
+  aboutTitle: 'מיהו הפותר',
+  aboutDescription: 'איתי קורוניו הוא מומחה מוביל בתחום העיצוב והחווית משתמש, עם ניסיון של למעלה מ-15 שנים בתחום ה-UX/UI.',
   images: {
     hero: '/assets/FB_IMG_1544304445964.jpg',
     about: '/assets/itay-koronio.jpg',
@@ -38,13 +42,14 @@ const defaultContent: ContentData = {
 // Context
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
-// Provider component - קל ומהיר
+// Provider component - רק הכרחי
 export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [content, setContent] = useState<ContentData>(defaultContent);
+  const [content] = useState<ContentData>(defaultContent);
   const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
 
   const updateContent = (newContent: Partial<ContentData>) => {
-    setContent(prev => ({ ...prev, ...newContent }));
+    console.log('Content updated:', newContent);
+    // בעתיד כאן תהיה לוגיקה לשמירה
   };
 
   const openAdminLogin = () => {
@@ -54,7 +59,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   return (
     <ContentContext.Provider value={{ content, updateContent, openAdminLogin }}>
       {children}
-      {/* טוען רק כשצריך */}
+      {/* רק אם לחצו על הכפתור */}
       {isAdminLoginOpen && (
         <AdminLogin 
           onClose={() => setIsAdminLoginOpen(false)} 
@@ -69,7 +74,11 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
 export const useContent = () => {
   const context = useContext(ContentContext);
   if (context === undefined) {
-    throw new Error('useContent must be used within a ContentProvider');
+    return {
+      content: defaultContent,
+      updateContent: () => {},
+      openAdminLogin: () => {}
+    };
   }
   return context;
 };
@@ -159,15 +168,19 @@ const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   };
 
   const handleImageUpload = (key: string, file: File) => {
-    // Create object URL for preview
-    const imageUrl = URL.createObjectURL(file);
-    setEditedContent(prev => ({
-      ...prev,
-      images: {
-        ...prev.images,
-        [key]: imageUrl
-      }
-    }));
+    try {
+      // Create object URL for preview
+      const imageUrl = URL.createObjectURL(file);
+      setEditedContent(prev => ({
+        ...prev,
+        images: {
+          ...prev.images,
+          [key]: imageUrl
+        }
+      }));
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
 
   return (
@@ -213,7 +226,7 @@ const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 </label>
                 <input
                   type="text"
-                  value={editedContent.title}
+                  value={editedContent.title || ''}
                   onChange={(e) => setEditedContent(prev => ({ ...prev, title: e.target.value }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
                 />
@@ -224,8 +237,32 @@ const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                   תיאור
                 </label>
                 <textarea
-                  value={editedContent.description}
+                  value={editedContent.description || ''}
                   onChange={(e) => setEditedContent(prev => ({ ...prev, description: e.target.value }))}
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  כותרת About
+                </label>
+                <input
+                  type="text"
+                  value={editedContent.aboutTitle || ''}
+                  onChange={(e) => setEditedContent(prev => ({ ...prev, aboutTitle: e.target.value }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  תיאור About
+                </label>
+                <textarea
+                  value={editedContent.aboutDescription || ''}
+                  onChange={(e) => setEditedContent(prev => ({ ...prev, aboutDescription: e.target.value }))}
                   rows={4}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
                 />
@@ -235,7 +272,7 @@ const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
           {activeTab === 'images' && (
             <ImageUploader
-              images={editedContent.images}
+              images={editedContent.images || {}}
               onImageUpload={handleImageUpload}
             />
           )}
@@ -265,7 +302,7 @@ const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 const ImageUploader: React.FC<{
   images: { [key: string]: string };
   onImageUpload: (key: string, file: File) => void;
-}> = ({ images, onImageUpload }) => {
+}> = ({ images = {}, onImageUpload }) => {
   const handleFileChange = (key: string, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -289,50 +326,54 @@ const ImageUploader: React.FC<{
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {imageKeys.map(({ key, label }) => (
-        <div key={key} className="border rounded-lg p-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {label}
-          </label>
-          
-          {images[key] && (
-            <div className="mb-3">
-              <img
-                src={images[key]}
-                alt={label}
-                className="w-full h-32 object-cover rounded-md"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                }}
-              />
-            </div>
-          )}
-          
-          <div className="relative">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleFileChange(key, e)}
-              className="hidden"
-              id={`upload-${key}`}
-            />
-            <label
-              htmlFor={`upload-${key}`}
-              className="flex items-center justify-center w-full p-3 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-royal-500 transition-colors"
-            >
-              <Upload className="h-5 w-5 text-gray-400 ml-2" />
-              <span className="text-sm text-gray-600">העלה תמונה</span>
+      {imageKeys.map(({ key, label }) => {
+        const imageUrl = images[key] || '';
+        
+        return (
+          <div key={key} className="border rounded-lg p-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              {label}
             </label>
+            
+            {imageUrl && (
+              <div className="mb-3">
+                <img
+                  src={imageUrl}
+                  alt={label}
+                  className="w-full h-32 object-cover rounded-md"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
+            
+            <div className="relative">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleFileChange(key, e)}
+                className="hidden"
+                id={`upload-${key}`}
+              />
+              <label
+                htmlFor={`upload-${key}`}
+                className="flex items-center justify-center w-full p-3 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-royal-500 transition-colors"
+              >
+                <Upload className="h-5 w-5 text-gray-400 ml-2" />
+                <span className="text-sm text-gray-600">העלה תמונה</span>
+              </label>
+            </div>
+            
+            {imageUrl && (
+              <p className="text-xs text-gray-500 mt-2 truncate">
+                {imageUrl.startsWith('blob:') ? 'תמונה חדשה הועלתה' : imageUrl}
+              </p>
+            )}
           </div>
-          
-          {images[key] && (
-            <p className="text-xs text-gray-500 mt-2 truncate">
-              {typeof images[key] === 'string' && images[key].startsWith('blob:') ? 'תמונה חדשה הועלתה' : images[key]}
-            </p>
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
