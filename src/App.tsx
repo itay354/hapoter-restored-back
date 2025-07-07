@@ -11,7 +11,6 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
-import ContentManager from './components/ContentManager';
 import SEOHelmet from './components/SEOHelmet';
 import { useContent } from './components/ContentManager';
 
@@ -38,7 +37,6 @@ const AppContent: React.FC = () => {
       <Contact />
       <Footer />
       <WhatsAppButton />
-      <ContentManager />
     </div>
   );
 };
