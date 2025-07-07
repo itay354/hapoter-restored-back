@@ -61,13 +61,16 @@ const Navbar: React.FC = () => {
       
       <div className="container mx-auto px-4 flex justify-between items-center relative z-10">
         <div className="flex items-center">
-          <a href="#" className="flex flex-col items-center justify-center">
+          <a href="#" className="flex flex-col items-center justify-center group">
             <img 
               src="/assets/new hapoter logo transparent.png" 
               alt="הפותר - לוגו" 
-              className="h-16 w-auto drop-shadow-sm"
+              className="h-16 w-auto drop-shadow-sm transition-transform group-hover:scale-105"
               onError={handleLogoError}
             />
+            <div className="text-royal-600 text-sm font-bold mt-1 group-hover:text-coral-500 transition-colors">
+              סוגרים לך פינה בעבודות דחופות
+            </div>
           </a>
         </div>
         
