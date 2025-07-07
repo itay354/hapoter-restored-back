@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
               onError={handleLogoError}
             />
             <div className="text-royal-600 text-sm font-bold mt-1 group-hover:text-coral-500 transition-colors">
-              סוגרים לך פינה בעבודות דחופות
+              הפותר
             </div>
           </a>
         </div>
