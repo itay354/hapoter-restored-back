@@ -356,17 +356,17 @@ const Services: React.FC = () => {
                     <h4 className="font-bold text-xl text-royal-600 mb-4">כל התמונות והסרטונים במערכת:</h4>
                     
                     {/* אזור הגלילה */}
-                    <div className="flex-grow overflow-hidden bg-gray-50 rounded-lg p-2">
-                      <div className="h-full overflow-y-auto scrollbar-hide space-y-3 pr-2">
+                    <div className="flex-grow overflow-hidden bg-gray-50 rounded-lg p-3 border border-gray-200">
+                      <div className="h-full overflow-y-auto space-y-4 pr-3" style={{scrollbarWidth: 'thin', scrollbarColor: '#cbd5e1 #f1f5f9'}}>
                         {getAllMediaFiles().map((media, i) => (
-                          <div key={i} className="rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-105 relative bg-white">
+                          <div key={i} className="rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-102 relative bg-white border border-gray-100">
                             {/* 3D Image effect */}
                             <div className="absolute -top-1 -right-1 w-full h-full bg-royal-200 opacity-0 hover:opacity-20 transition-opacity rounded-lg transform rotate-1"></div>
                             <div className="relative">
                               {media.type === 'video' ? (
                                 <div className="relative">
                                   <video 
-                                    className="w-full h-32 object-cover"
+                                    className="w-full h-48 object-cover"
                                     controls={false}
                                     muted
                                     preload="metadata"
@@ -377,7 +377,7 @@ const Services: React.FC = () => {
                                       const parent = target.parentElement;
                                       if (parent && !parent.querySelector('.video-fallback')) {
                                         const fallbackDiv = document.createElement('div');
-                                        fallbackDiv.className = 'video-fallback w-full h-32 bg-gray-100 flex items-center justify-center text-gray-500 text-sm';
+                                        fallbackDiv.className = 'video-fallback w-full h-48 bg-gray-100 flex items-center justify-center text-gray-500 text-sm flex-col';
                                         fallbackDiv.innerHTML = '🎬<br>קובץ וידאו';
                                         parent.appendChild(fallbackDiv);
                                       }
@@ -394,13 +394,16 @@ const Services: React.FC = () => {
                                 <img 
                                   src={media.url} 
                                   alt={media.alt} 
-                                  className="w-full h-32 object-cover"
+                                  className="w-full h-48 object-contain bg-white"
                                   onError={handleImageError}
                                 />
                               )}
-                              <div className="p-2">
-                                <p className="text-xs font-medium text-gray-700 truncate" title={media.title}>
+                              <div className="p-3">
+                                <p className="text-sm font-medium text-gray-700 line-clamp-2" title={media.title}>
                                   {media.title}
+                                </p>
+                                <p className="text-xs text-gray-500 mt-1">
+                                  {media.type === 'video' ? 'וידאו' : 'תמונה'}
                                 </p>
                               </div>
                             </div>
@@ -418,8 +421,9 @@ const Services: React.FC = () => {
                     </div>
                     
                     {/* מידע על הגלילה */}
-                    <div className="mt-2 text-xs text-gray-500 text-center">
+                    <div className="mt-3 text-xs text-gray-500 text-center bg-white rounded px-2 py-1">
                       <p>סך הכל: {getAllMediaFiles().length} קבצי מדיה</p>
+                      <p className="text-gray-400">גללו למעלה ולמטה לצפייה בכל הקבצים</p>
                     </div>
                   </div>
                 </div>
