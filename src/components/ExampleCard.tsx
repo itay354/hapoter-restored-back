@@ -159,7 +159,25 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
 
           {/* Drag instruction */}
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full whitespace-nowrap z-20 select-none pointer-events-none">
-            גררו את הקו לצפייה בשינוי ← →
+            גררו את הקו ← → לצפייה בשינוי
+          </div>
+          
+          {/* Clear Before/After indicators */}
+          <div className="absolute top-4 right-4 px-3 py-1 bg-coral-500 text-white rounded-full text-sm font-medium z-20 select-none pointer-events-none">
+            לפני
+          </div>
+          
+          <div className="absolute top-4 left-4 px-3 py-1 bg-royal-600 text-white rounded-full text-sm font-medium z-20 select-none pointer-events-none">
+            אחרי
+          </div>
+          
+          {/* Side arrows to indicate direction */}
+          <div className="absolute top-1/2 right-2 transform -translate-y-1/2 text-coral-500 bg-white bg-opacity-80 rounded-full p-2 z-20 select-none pointer-events-none">
+            <div className="text-lg font-bold">→</div>
+          </div>
+          
+          <div className="absolute top-1/2 left-2 transform -translate-y-1/2 text-royal-600 bg-white bg-opacity-80 rounded-full p-2 z-20 select-none pointer-events-none">
+            <div className="text-lg font-bold">←</div>
           </div>
         </div>
       </div>
