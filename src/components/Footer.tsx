@@ -80,25 +80,6 @@ const Footer: React.FC = () => {
             <p className="text-gray-400 mb-6">
               סוגרים לך פינה בעבודות עיצוב ותוכן דחופות באמצעות טכנולוגיית AI מתקדמת.
             </p>
-            <div className="flex space-x-4 space-x-reverse">
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-coral-500 hover:bg-gray-700 transition-colors relative">
-                {/* 3D Button effect */}
-                <div className="absolute inset-0 rounded-full bg-gray-900 opacity-0 hover:opacity-30 transform translate-y-1"></div>
-                <span className="relative"><Instagram className="h-5 w-5" /></span>
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-coral-500 hover:bg-gray-700 transition-colors relative">
-                <div className="absolute inset-0 rounded-full bg-gray-900 opacity-0 hover:opacity-30 transform translate-y-1"></div>
-                <span className="relative"><Facebook className="h-5 w-5" /></span>
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-coral-500 hover:bg-gray-700 transition-colors relative">
-                <div className="absolute inset-0 rounded-full bg-gray-900 opacity-0 hover:opacity-30 transform translate-y-1"></div>
-                <span className="relative"><Twitter className="h-5 w-5" /></span>
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-coral-500 hover:bg-gray-700 transition-colors relative">
-                <div className="absolute inset-0 rounded-full bg-gray-900 opacity-0 hover:opacity-30 transform translate-y-1"></div>
-                <span className="relative"><Linkedin className="h-5 w-5" /></span>
-              </a>
-            </div>
           </div>
           
           <div>
