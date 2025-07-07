@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
       if (!parent.querySelector('.video-fallback')) {
         const fallbackImg = document.createElement('img');
         fallbackImg.className = 'video-fallback w-full h-auto';
-        fallbackImg.src = content.images.hero || "/assets/generated_image (1).png";
+        fallbackImg.src = content.images.hero || "/assets/FB_IMG_1544304445964.jpg";
         fallbackImg.alt = "המנהל שהופך ממבולבל למבסוט";
         fallbackImg.style.filter = 'brightness(1.05) contrast(1.02)';
         parent.appendChild(fallbackImg);
@@ -87,7 +87,7 @@ const Hero: React.FC = () => {
                   playsInline
                   preload="metadata"
                   loading="lazy"
-                  poster="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1"
+                  poster="/assets/FB_IMG_1544304445964.jpg"
                   className="w-full h-full object-cover rounded-xl"
                   style={{
                     filter: 'brightness(1.05) contrast(1.02)',

@@ -11,7 +11,7 @@ const AboutMe: React.FC = () => {
     target.onerror = null; // מניעת לופ אין-סופי
     
     // תמונת fallback מוגדרת מראש
-    target.src = "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
+    target.src = "/assets/FB_IMG_1544304445964.jpg";
     target.alt = "תמונת ברירת מחדל - איתי קורוניו";
   };
   

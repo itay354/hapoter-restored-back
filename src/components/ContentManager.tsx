@@ -23,7 +23,7 @@ const defaultContent: ContentConfig = {
   aboutTitle: 'מיהו הפותר?',
   aboutDescription: 'מתמחה בעיצוב, תוכן ופתרונות יצירתיים המשלבים טכנולוגיית בינה מלאכותית מתקדמת',
   images: {
-    hero: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1",
+    hero: "/assets/FB_IMG_1544304445964.jpg",
     about: "/assets/itay-koronio.jpg",
     // רק תמונות חיוניות - צמצום משמעותי
     image1: "/assets/tanti model before.jpg",
