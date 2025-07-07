@@ -36,7 +36,8 @@ const Examples: React.FC = () => {
         after: content.images.after3 || "/assets/tanti model after.jpg",
         title: "הנפשת תמונה לוידאו - הדמיית Tanti Model",
         type: "video",
-        videoUrl: "/videos/doogmanit-video.mp4#t=3"
+        videoUrl: "/videos/doogmanit-video.mp4#t=3",
+        posterImage: "/assets/tanti model after.jpg"
       },
     ],
     // טאב יצירת מוקאפים - משתמש בתמונות דינמיות מ-ContentManager
@@ -302,7 +303,7 @@ const Examples: React.FC = () => {
                           controls
                           preload="none"
                           loading="lazy"
-                          poster={example.before}
+                          poster={example.posterImage || example.before}
                           className="w-full h-full object-contain"
                           onLoadedMetadata={(e) => {
                             // הגדרת הפריים השלישי כ-thumbnail
