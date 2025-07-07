@@ -8,6 +8,49 @@ const Services: React.FC = () => {
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0, width: 0 });
   const serviceRefs = useRef<(HTMLDivElement | null)[]>([]);
   
+  // פונקציה להכנת מערך התמונות והסרטונים מהמערכת
+  const getAllMediaFiles = () => {
+    const mediaFiles = [];
+    
+    // הוספת תמונות מ-content.images
+    Object.entries(content.images).forEach(([key, url]) => {
+      if (url && url.trim()) {
+        mediaFiles.push({
+          type: url.includes('.mp4') || url.includes('video') ? 'video' : 'image',
+          url: url,
+          title: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
+          alt: `${key} - תמונה מהמערכת`
+        });
+      }
+    });
+    
+    // הוספת וידאוים נוספים
+    const additionalVideos = [
+      {
+        type: 'video',
+        url: '/videos/first-model.mp4',
+        title: 'דגם ראשון - סרטון',
+        alt: 'סרטון הדמיה ראשון'
+      },
+      {
+        type: 'video',
+        url: '/videos/doogmanit-video.mp4',
+        title: 'הנפשת דוגמנית',
+        alt: 'סרטון הנפשת דוגמנית'
+      },
+      {
+        type: 'video',
+        url: '/videos/compressed-hapoter-video copy.mp4',
+        title: 'וידאו הפותר',
+        alt: 'סרטון הפותר המרכזי'
+      }
+    ];
+    
+    mediaFiles.push(...additionalVideos);
+    
+    return mediaFiles;
+  };
+
   // חישוב מיקום הפופאפ על פי הקוביה שנבחרה
   useEffect(() => {
     if (selectedService !== null && serviceRefs.current[selectedService]) {
@@ -274,69 +317,180 @@ const Services: React.FC = () => {
             </button>
             
             <div className="relative z-10 h-full">
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-full">
-                {/* עמודת תוכן - 2/3 מהמקום */}
-                <div className="lg:col-span-3 flex flex-col">
-                  <h3 className="text-3xl font-bold text-royal-600 mb-4">
-                    {services[selectedService].title}
-                  </h3>
-                  
-                  <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                    {services[selectedService].detailedContent.description}
-                  </p>
-                  
-                  <div className="bg-royal-50 p-6 rounded-lg mb-6 flex-grow">
-                    <h4 className="font-bold text-xl text-royal-600 mb-4">יתרונות השירות:</h4>
-                    <ul className="list-disc list-inside space-y-3 text-gray-700 text-base">
-                      {services[selectedService].detailedContent.bulletPoints.map((point, i) => (
-                        <li key={i} className="leading-relaxed pl-2">{point}</li>
-                      ))}
-                    </ul>
+              {/* תצוגה מיוחדת עבור "הפקת תמונות ווידאו" ו"אפיון UX" */}
+              {(selectedService === 1 || selectedService === 3) ? (
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-full">
+                  {/* עמודת תוכן - 3/5 מהמקום */}
+                  <div className="lg:col-span-3 flex flex-col">
+                    <h3 className="text-3xl font-bold text-royal-600 mb-4">
+                      {services[selectedService].title}
+                    </h3>
+                    
+                    <p className="text-gray-700 mb-6 text-lg leading-relaxed">
+                      {services[selectedService].detailedContent.description}
+                    </p>
+                    
+                    <div className="bg-royal-50 p-6 rounded-lg mb-6 flex-grow">
+                      <h4 className="font-bold text-xl text-royal-600 mb-4">יתרונות השירות:</h4>
+                      <ul className="list-disc list-inside space-y-3 text-gray-700 text-base">
+                        {services[selectedService].detailedContent.bulletPoints.map((point, i) => (
+                          <li key={i} className="leading-relaxed pl-2">{point}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="text-center mt-auto pt-4">
+                      <a 
+                        href="#contact" 
+                        className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg relative"
+                      >
+                        {/* 3D Button effect */}
+                        <div className="absolute inset-0 bg-royal-800 opacity-0 hover:opacity-30 rounded-lg transform translate-y-1"></div>
+                        <span className="relative">קבלו הצעת מחיר לשירות זה</span>
+                      </a>
+                    </div>
                   </div>
                   
-                  <div className="text-center mt-auto pt-4">
-                    <a 
-                      href="#contact" 
-                      className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg relative"
-                    >
-                      {/* 3D Button effect */}
-                      <div className="absolute inset-0 bg-royal-800 opacity-0 hover:opacity-30 rounded-lg transform translate-y-1"></div>
-                      <span className="relative">קבלו הצעת מחיר לשירות זה</span>
-                    </a>
+                  {/* עמודת תמונות וסרטונים - 2/5 מהמקום עם גלילה פנימית */}
+                  <div className="lg:col-span-2 flex flex-col h-full">
+                    <h4 className="font-bold text-xl text-royal-600 mb-4">כל התמונות והסרטונים במערכת:</h4>
+                    
+                    {/* אזור הגלילה */}
+                    <div className="flex-grow overflow-hidden bg-gray-50 rounded-lg p-2">
+                      <div className="h-full overflow-y-auto scrollbar-hide space-y-3 pr-2">
+                        {getAllMediaFiles().map((media, i) => (
+                          <div key={i} className="rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-105 relative bg-white">
+                            {/* 3D Image effect */}
+                            <div className="absolute -top-1 -right-1 w-full h-full bg-royal-200 opacity-0 hover:opacity-20 transition-opacity rounded-lg transform rotate-1"></div>
+                            <div className="relative">
+                              {media.type === 'video' ? (
+                                <div className="relative">
+                                  <video 
+                                    className="w-full h-32 object-cover"
+                                    controls={false}
+                                    muted
+                                    preload="metadata"
+                                    poster={media.url.replace('.mp4', '.jpg')}
+                                    onError={(e) => {
+                                      const target = e.target as HTMLVideoElement;
+                                      target.style.display = 'none';
+                                      const parent = target.parentElement;
+                                      if (parent && !parent.querySelector('.video-fallback')) {
+                                        const fallbackDiv = document.createElement('div');
+                                        fallbackDiv.className = 'video-fallback w-full h-32 bg-gray-100 flex items-center justify-center text-gray-500 text-sm';
+                                        fallbackDiv.innerHTML = '🎬<br>קובץ וידאו';
+                                        parent.appendChild(fallbackDiv);
+                                      }
+                                    }}
+                                  >
+                                    <source src={media.url} type="video/mp4" />
+                                  </video>
+                                  {/* סמל וידאו */}
+                                  <div className="absolute top-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-xs">
+                                    🎬 וידאו
+                                  </div>
+                                </div>
+                              ) : (
+                                <img 
+                                  src={media.url} 
+                                  alt={media.alt} 
+                                  className="w-full h-32 object-cover"
+                                  onError={handleImageError}
+                                />
+                              )}
+                              <div className="p-2">
+                                <p className="text-xs font-medium text-gray-700 truncate" title={media.title}>
+                                  {media.title}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                        
+                        {/* הודעה אם אין תמונות */}
+                        {getAllMediaFiles().length === 0 && (
+                          <div className="text-center text-gray-400 py-8">
+                            <div className="text-2xl mb-2">📁</div>
+                            <p className="text-sm">אין תמונות או סרטונים זמינים</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    {/* מידע על הגלילה */}
+                    <div className="mt-2 text-xs text-gray-500 text-center">
+                      <p>סך הכל: {getAllMediaFiles().length} קבצי מדיה</p>
+                    </div>
                   </div>
                 </div>
-                
-                {/* עמודת תמונות - 1/3 מהמקום */}
-                <div className="lg:col-span-2 flex flex-col">
-                  <h4 className="font-bold text-xl text-royal-600 mb-4">דוגמאות מהעבודות שלנו:</h4>
-                  <div className="space-y-4 flex-grow">
-                    {services[selectedService].detailedContent.images.map((img, i) => (
-                      <div key={i} className="rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-105 relative">
-                        {/* 3D Image effect */}
-                        <div className="absolute -top-1 -right-1 w-full h-full bg-royal-200 opacity-0 hover:opacity-20 transition-opacity rounded-lg transform rotate-1"></div>
-                        <div className="relative">
-                          <img 
-                            src={img} 
-                            alt={`דוגמה ${i+1} עבור ${services[selectedService].title}`} 
-                            className="w-full h-40 object-cover"
-                            onError={handleImageError}
-                          />
-                        </div>
-                      </div>
-                    ))}
+              ) : (
+                /* תצוגה רגילה עבור שאר השירותים */
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-full">
+                  {/* עמודת תוכן - 3/5 מהמקום */}
+                  <div className="lg:col-span-3 flex flex-col">
+                    <h3 className="text-3xl font-bold text-royal-600 mb-4">
+                      {services[selectedService].title}
+                    </h3>
                     
-                    {/* תמונה נוספת אם יש פחות מ-3 תמונות */}
-                    {services[selectedService].detailedContent.images.length < 3 && (
-                      <div className="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 h-40 flex items-center justify-center">
-                        <div className="text-center text-gray-400">
-                          <div className="text-2xl mb-2">🎨</div>
-                          <p className="text-sm">עוד דוגמאות<br />בקרוב...</p>
+                    <p className="text-gray-700 mb-6 text-lg leading-relaxed">
+                      {services[selectedService].detailedContent.description}
+                    </p>
+                    
+                    <div className="bg-royal-50 p-6 rounded-lg mb-6 flex-grow">
+                      <h4 className="font-bold text-xl text-royal-600 mb-4">יתרונות השירות:</h4>
+                      <ul className="list-disc list-inside space-y-3 text-gray-700 text-base">
+                        {services[selectedService].detailedContent.bulletPoints.map((point, i) => (
+                          <li key={i} className="leading-relaxed pl-2">{point}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="text-center mt-auto pt-4">
+                      <a 
+                        href="#contact" 
+                        className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg relative"
+                      >
+                        {/* 3D Button effect */}
+                        <div className="absolute inset-0 bg-royal-800 opacity-0 hover:opacity-30 rounded-lg transform translate-y-1"></div>
+                        <span className="relative">קבלו הצעת מחיר לשירות זה</span>
+                      </a>
+                    </div>
+                  </div>
+                  
+                  {/* עמודת תמונות רגילה - 2/5 מהמקום */}
+                  <div className="lg:col-span-2 flex flex-col">
+                    <h4 className="font-bold text-xl text-royal-600 mb-4">דוגמאות מהעבודות שלנו:</h4>
+                    <div className="space-y-4 flex-grow">
+                      {services[selectedService].detailedContent.images.map((img, i) => (
+                        <div key={i} className="rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-105 relative">
+                          {/* 3D Image effect */}
+                          <div className="absolute -top-1 -right-1 w-full h-full bg-royal-200 opacity-0 hover:opacity-20 transition-opacity rounded-lg transform rotate-1"></div>
+                          <div className="relative">
+                            <img 
+                              src={img} 
+                              alt={`דוגמה ${i+1} עבור ${services[selectedService].title}`} 
+                              className="w-full h-40 object-cover"
+                              onError={handleImageError}
+                            />
+                          </div>
                         </div>
+                      ))}
+                      
+                      {/* תמונה נוספת אם יש פחות מ-3 תמונות */}
+                      {services[selectedService].detailedContent.images.length < 3 && (
+                        <div className="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 h-40 flex items-center justify-center">
+                          <div className="text-center text-gray-400">
+                            <div className="text-2xl mb-2">🎨</div>
+                            <p className="text-sm">עוד דוגמאות<br />בקרוב...</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
                       </div>
                     )}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         )}
