@@ -114,11 +114,11 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
             />
           </div>
           
-          {/* After Image - Left side (masked by the divider) - הגדלת התמונה */}
+          {/* After Image - Right side (masked by the divider) */}
           <div 
             className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white p-1 select-none pointer-events-none"
             style={{ 
-              clipPath: `polygon(0 0, ${dividerPosition}% 0, ${dividerPosition}% 100%, 0 100%)`
+              clipPath: `polygon(${dividerPosition}% 0, 100% 0, 100% 100%, ${dividerPosition}% 100%)`
             }}
           >
             <img 
@@ -156,18 +156,10 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
             </div>
           </div>
 
-          {/* Before/After labels */}
-          <div className="absolute bottom-4 right-4 px-4 py-2 bg-coral-500 text-white rounded-full text-sm font-medium z-20 select-none pointer-events-none">
-            לפני
-          </div>
-          
-          <div className="absolute bottom-4 left-4 px-4 py-2 bg-royal-600 text-white rounded-full text-sm font-medium z-20 select-none pointer-events-none">
-            אחרי
-          </div>
 
           {/* Drag instruction */}
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full whitespace-nowrap z-20 select-none pointer-events-none">
-            גררו את הקו לצפייה בשינוי
+            גררו את הקו לצפייה בשינוי ← →
           </div>
         </div>
       </div>
