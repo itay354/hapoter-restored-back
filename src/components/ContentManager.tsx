@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { X, Upload, Save, Eye, EyeOff, Lock } from 'lucide-react';
+import { X, Upload, Save } from 'lucide-react';
 
 // Types
 interface ContentData {
@@ -71,20 +71,9 @@ export const useContent = () => {
 // Admin Panel Component
 const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const { content, updateContent } = useContent();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // מאוטומטיקה מאושר
   const [activeTab, setActiveTab] = useState<'content' | 'images'>('content');
   const [editedContent, setEditedContent] = useState(content);
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleLogin = () => {
-    if (password === 'admin123') {
-      setIsAuthenticated(true);
-      setPassword('');
-    } else {
-      alert('סיסמה שגויה!');
-    }
-  };
 
   const handleSave = () => {
     updateContent(editedContent);
@@ -102,64 +91,6 @@ const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       }
     }));
   };
-
-  if (!isAuthenticated) {
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-              <Lock className="h-6 w-6 ml-2" />
-              כניסת מנהל
-            </h2>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                סיסמה
-              </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
-                  placeholder="הזן סיסמה"
-                  onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
-              </div>
-            </div>
-            
-            <div className="flex gap-3">
-              <button
-                onClick={handleLogin}
-                className="flex-1 bg-royal-600 text-white py-2 px-4 rounded-md hover:bg-royal-700 transition-colors"
-              >
-                כניסה
-              </button>
-              <button
-                onClick={onClose}
-                className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
-              >
-                ביטול
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
