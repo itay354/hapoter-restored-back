@@ -168,7 +168,7 @@ const Hero: React.FC = () => {
           
           <div className="lg:col-span-6 lg:order-1">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-              <span className="text-royal-600">סוגר לך פינה במשימות עיצוב ותוכן דחופות</span>
+              <span className="text-royal-600">הפותר - סוגר לך פינה במשימות עיצוב ותוכן דחופות</span>
             </h1>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
               תקועים עם הכנת מצגת למחר? צריכים סרטון פרסומת מהיר? מחקרים? אנליזה? אנחנו מספקים פתרונות עיצוב, מחקר, תוכן ואנליזה מהירים ואיכותיים באמצעות טכנולוגיית AI מתקדמת. עם הפותר, תקבלו תוצאות מעולות במהירות ובמחירים זולים בהרבה משיטות העיצוב המסורתיות
