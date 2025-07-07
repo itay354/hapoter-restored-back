@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { X, Upload, Save } from 'lucide-react';
+import { X, Upload, Save, Lock } from 'lucide-react';
 
 // Types
 interface ContentData {
@@ -38,23 +38,29 @@ const defaultContent: ContentData = {
 // Context
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
-// Provider component
+// Provider component - קל ומהיר
 export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<ContentData>(defaultContent);
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
 
   const updateContent = (newContent: Partial<ContentData>) => {
     setContent(prev => ({ ...prev, ...newContent }));
   };
 
   const openAdminLogin = () => {
-    setIsAdminOpen(true);
+    setIsAdminLoginOpen(true);
   };
 
   return (
     <ContentContext.Provider value={{ content, updateContent, openAdminLogin }}>
       {children}
-      {isAdminOpen && <AdminPanel onClose={() => setIsAdminOpen(false)} />}
+      {/* טוען רק כשצריך */}
+      {isAdminLoginOpen && (
+        <AdminLogin 
+          onClose={() => setIsAdminLoginOpen(false)} 
+          onSuccess={() => setIsAdminLoginOpen(false)}
+        />
+      )}
     </ContentContext.Provider>
   );
 };
@@ -68,10 +74,82 @@ export const useContent = () => {
   return context;
 };
 
+// Admin Login Component
+const AdminLogin: React.FC<{ 
+  onClose: () => void;
+  onSuccess: () => void;
+}> = ({ onClose, onSuccess }) => {
+  const [password, setPassword] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleLogin = () => {
+    if (password === 'hapoter2024admin') {
+      setIsAuthenticated(true);
+      setError('');
+    } else {
+      setError('סיסמה שגויה');
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
+  // אם מאושר, הצג פאנל אדמין
+  if (isAuthenticated) {
+    return <AdminPanel onClose={onSuccess} />;
+  }
+
+  // אחרת, הצג מסך לוגין
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg w-full max-w-md p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl font-bold text-gray-900">כניסה לאזור האדמין</h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              סיסמה
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+              placeholder="הזן סיסמה"
+              autoFocus
+            />
+          </div>
+
+          {error && (
+            <div className="text-red-600 text-sm">{error}</div>
+          )}
+
+          <button
+            onClick={handleLogin}
+            className="w-full bg-royal-600 text-white py-2 px-4 rounded-md hover:bg-royal-700 transition-colors flex items-center justify-center gap-2"
+          >
+            <Lock className="h-4 w-4" />
+            כניסה
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Admin Panel Component
 const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const { content, updateContent } = useContent();
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // מאוטומטיקה מאושר
   const [activeTab, setActiveTab] = useState<'content' | 'images'>('content');
   const [editedContent, setEditedContent] = useState(content);
 
