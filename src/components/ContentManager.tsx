@@ -989,6 +989,14 @@ const ContentManager: React.FC = () => {
           </div>
         </button>
         <button 
+          className={`px-3 py-2 ${activeTab === 'services' ? 'border-b-2 border-royal-600 text-royal-600' : 'text-gray-500'}`}
+          onClick={() => setActiveTab('services')}
+        >
+          <div className="flex items-center">
+            🎯 שירותים
+          </div>
+        </button>
+        <button 
           className={`px-3 py-2 ${activeTab === 'settings' ? 'border-b-2 border-royal-600 text-royal-600' : 'text-gray-500'}`}
           onClick={() => setActiveTab('settings')}
         >
@@ -1251,6 +1259,137 @@ const ContentManager: React.FC = () => {
             <p>אחסון: IndexedDB (עד ~10MB מותאם לביצועים)</p>
             <p>איכות תמונה: 70% (מותאם למהירות)</p>
             <p>רזולוציה מקסימלית: 800x600</p>
+          </div>
+        </div>
+      )}
+      
+      {activeTab === 'services' && (
+        <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+          <h4 className="font-medium text-base mb-4 text-royal-600">תמונות ווידאו לפופאפים של השירותים</h4>
+          
+          {/* עיצוב מצגות */}
+          <div className="border border-royal-200 rounded-lg p-3 mb-4">
+            <h5 className="font-medium text-sm mb-3 text-royal-600">🎯 עיצוב מצגות</h5>
+            <div className="grid grid-cols-1 gap-2">
+              <div className="bg-royal-50 p-2 rounded">
+                <p className="text-xs text-royal-700 mb-2"><strong>דוגמאות מצגות:</strong></p>
+                <ImageUploader 
+                  imageKey="presentations-example-1" 
+                  imageUrl={content.images['presentations-example-1'] || ''}
+                  label="דוגמה 1"
+                  onUpload={updateImage || (() => {})}
+                  maxWidth={800}
+                  maxHeight={600}
+                  quality={0.8}
+                />
+                <ImageUploader 
+                  imageKey="presentations-example-2" 
+                  imageUrl={content.images['presentations-example-2'] || ''}
+                  label="דוגמה 2"
+                  onUpload={updateImage || (() => {})}
+                  maxWidth={800}
+                  maxHeight={600}
+                  quality={0.8}
+                />
+              </div>
+              <div className="bg-green-50 p-2 rounded">
+                <p className="text-xs text-green-700 mb-2"><strong>סרטוני הסבר:</strong></p>
+                <ImageUploader 
+                  imageKey="presentations-video-1" 
+                  imageUrl={content.images['presentations-video-1'] || ''}
+                  label="וידאו הסבר"
+                  onUpload={updateImage || (() => {})}
+                  maxWidth={1920}
+                  maxHeight={1080}
+                  quality={0.9}
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* הפקת תמונות ווידאו */}
+          <div className="border border-coral-200 rounded-lg p-3 mb-4">
+            <h5 className="font-medium text-sm mb-3 text-coral-600">🎨 הפקת תמונות ווידאו</h5>
+            <div className="grid grid-cols-1 gap-2">
+              <div className="bg-coral-50 p-2 rounded">
+                <p className="text-xs text-coral-700 mb-2"><strong>לפני-אחרי:</strong></p>
+                <div className="grid grid-cols-2 gap-2">
+                  <ImageUploader 
+                    imageKey="images-video-before-1" 
+                    imageUrl={content.images['images-video-before-1'] || ''}
+                    label="לפני 1"
+                    onUpload={updateImage || (() => {})}
+                    isBeforeAfter={true}
+                  />
+                  <ImageUploader 
+                    imageKey="images-video-after-1" 
+                    imageUrl={content.images['images-video-after-1'] || ''}
+                    label="אחרי 1"
+                    onUpload={updateImage || (() => {})}
+                    isBeforeAfter={true}
+                  />
+                </div>
+              </div>
+              <div className="bg-blue-50 p-2 rounded">
+                <p className="text-xs text-blue-700 mb-2"><strong>דוגמאות נוספות:</strong></p>
+                <ImageUploader 
+                  imageKey="images-video-example-1" 
+                  imageUrl={content.images['images-video-example-1'] || ''}
+                  label="דוגמה"
+                  onUpload={updateImage || (() => {})}
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* מחקר ורעיונאות */}
+          <div className="border border-green-200 rounded-lg p-3 mb-4">
+            <h5 className="font-medium text-sm mb-3 text-green-600">💡 מחקר, רעיונאות ותוכן</h5>
+            <div className="bg-green-50 p-2 rounded">
+              <p className="text-xs text-green-700 mb-2"><strong>דוגמאות תוכן:</strong></p>
+              <ImageUploader 
+                imageKey="research-content-example-1" 
+                imageUrl={content.images['research-content-example-1'] || ''}
+                label="דוגמת תוכן"
+                onUpload={updateImage || (() => {})}
+              />
+              <ImageUploader 
+                imageKey="research-content-process-1" 
+                imageUrl={content.images['research-content-process-1'] || ''}
+                label="תהליך עבודה"
+                onUpload={updateImage || (() => {})}
+              />
+            </div>
+          </div>
+          
+          {/* אפיון UX */}
+          <div className="border border-purple-200 rounded-lg p-3 mb-4">
+            <h5 className="font-medium text-sm mb-3 text-purple-600">🎯 אפיון UX</h5>
+            <div className="space-y-2">
+              <div className="bg-purple-50 p-2 rounded">
+                <p className="text-xs text-purple-700 mb-2"><strong>Wireframes:</strong></p>
+                <ImageUploader 
+                  imageKey="ux-design-wireframe-1" 
+                  imageUrl={content.images['ux-design-wireframe-1'] || ''}
+                  label="Wireframe"
+                  onUpload={updateImage || (() => {})}
+                />
+              </div>
+              <div className="bg-indigo-50 p-2 rounded">
+                <p className="text-xs text-indigo-700 mb-2"><strong>User Flows:</strong></p>
+                <ImageUploader 
+                  imageKey="ux-design-userflow-1" 
+                  imageUrl={content.images['ux-design-userflow-1'] || ''}
+                  label="User Flow"
+                  onUpload={updateImage || (() => {})}
+                />
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-xs text-gray-500 mt-4 p-3 bg-gray-50 rounded">
+            <p><strong>טיפ:</strong> התמונות והסרטונים שתעלו כאן יופיעו בפופאפים של השירותים</p>
+            <p>כל שירות יקבל את התמונות הרלוונטיות לו אוטומטית</p>
           </div>
         </div>
       )}
