@@ -281,12 +281,14 @@ const Services: React.FC = () => {
           <div 
             className="absolute bg-white rounded-xl shadow-2xl p-8 transition-all duration-500 animate-fade-in z-50"
             style={{
-              top: `${popupPosition.top}px`,
-              left: `${popupPosition.left}px`,
-              width: `${Math.max(popupPosition.width * 2.2, 800)}px`,
-              maxWidth: '90vw',
-              height: '500px',
-              marginBottom: '50px'
+              top: selectedService >= 2 ? `${popupPosition.top - 100}px` : `${popupPosition.top + 20}px`,
+              left: `${Math.max(popupPosition.left - 100, 20)}px`,
+              width: `${Math.min(Math.max(popupPosition.width * 2.2, 800), window.innerWidth - 40)}px`,
+              maxWidth: 'calc(100vw - 40px)',
+              height: '450px',
+              maxHeight: '70vh',
+              marginBottom: '50px',
+              zIndex: 9999
             }}
           >
             {/* חץ מחבר דינמי */}
@@ -356,17 +358,23 @@ const Services: React.FC = () => {
                     <h4 className="font-bold text-xl text-royal-600 mb-4">כל התמונות והסרטונים במערכת:</h4>
                     
                     {/* אזור הגלילה */}
-                    <div className="flex-grow overflow-hidden bg-gray-50 rounded-lg p-3 border border-gray-200">
-                      <div className="h-full overflow-y-auto space-y-4 pr-3" style={{scrollbarWidth: 'thin', scrollbarColor: '#cbd5e1 #f1f5f9'}}>
+                    <div className="flex-grow overflow-hidden bg-gray-50 rounded-lg p-3 border border-gray-200" style={{height: '300px'}}>
+                      <div 
+                        className="h-full overflow-y-scroll space-y-4 pr-2" 
+                        style={{
+                          scrollbarWidth: 'thin', 
+                          scrollbarColor: '#6366f1 #e2e8f0'
+                        }}
+                      >
                         {getAllMediaFiles().map((media, i) => (
-                          <div key={i} className="rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-102 relative bg-white border border-gray-100">
+                          <div key={i} className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow relative bg-white border border-gray-100">
                             {/* 3D Image effect */}
-                            <div className="absolute -top-1 -right-1 w-full h-full bg-royal-200 opacity-0 hover:opacity-20 transition-opacity rounded-lg transform rotate-1"></div>
+                            <div className="absolute -top-1 -right-1 w-full h-full bg-royal-200 opacity-0 hover:opacity-10 transition-opacity rounded-lg transform rotate-1"></div>
                             <div className="relative">
                               {media.type === 'video' ? (
                                 <div className="relative">
                                   <video 
-                                    className="w-full h-48 object-cover"
+                                    className="w-full h-40 object-cover"
                                     controls={false}
                                     muted
                                     preload="metadata"
@@ -377,7 +385,7 @@ const Services: React.FC = () => {
                                       const parent = target.parentElement;
                                       if (parent && !parent.querySelector('.video-fallback')) {
                                         const fallbackDiv = document.createElement('div');
-                                        fallbackDiv.className = 'video-fallback w-full h-48 bg-gray-100 flex items-center justify-center text-gray-500 text-sm flex-col';
+                                        fallbackDiv.className = 'video-fallback w-full h-40 bg-gray-100 flex items-center justify-center text-gray-500 text-sm flex-col';
                                         fallbackDiv.innerHTML = '🎬<br>קובץ וידאו';
                                         parent.appendChild(fallbackDiv);
                                       }
@@ -394,15 +402,15 @@ const Services: React.FC = () => {
                                 <img 
                                   src={media.url} 
                                   alt={media.alt} 
-                                  className="w-full h-48 object-contain bg-white"
+                                  className="w-full h-40 object-contain bg-white"
                                   onError={handleImageError}
                                 />
                               )}
-                              <div className="p-3">
-                                <p className="text-sm font-medium text-gray-700 line-clamp-2" title={media.title}>
+                              <div className="p-2">
+                                <p className="text-xs font-medium text-gray-700 truncate" title={media.title}>
                                   {media.title}
                                 </p>
-                                <p className="text-xs text-gray-500 mt-1">
+                                <p className="text-xs text-gray-500 mt-0.5">
                                   {media.type === 'video' ? 'וידאו' : 'תמונה'}
                                 </p>
                               </div>
@@ -423,7 +431,7 @@ const Services: React.FC = () => {
                     {/* מידע על הגלילה */}
                     <div className="mt-3 text-xs text-gray-500 text-center bg-white rounded px-2 py-1">
                       <p>סך הכל: {getAllMediaFiles().length} קבצי מדיה</p>
-                      <p className="text-gray-400">גללו למעלה ולמטה לצפייה בכל הקבצים</p>
+                      <p className="text-gray-400">⬇️ גללו כאן לצפייה ⬇️</p>
                     </div>
                   </div>
                 </div>
@@ -440,11 +448,11 @@ const Services: React.FC = () => {
                       {services[selectedService].detailedContent.description}
                     </p>
                     
-                    <div className="bg-royal-50 p-6 rounded-lg mb-6 flex-grow">
+                    <div className="bg-royal-50 p-4 rounded-lg mb-4 overflow-hidden">
                       <h4 className="font-bold text-xl text-royal-600 mb-4">יתרונות השירות:</h4>
-                      <ul className="list-disc list-inside space-y-3 text-gray-700 text-base">
+                      <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
                         {services[selectedService].detailedContent.bulletPoints.map((point, i) => (
-                          <li key={i} className="leading-relaxed pl-2">{point}</li>
+                          <li key={i} className="leading-tight pl-1">{point}</li>
                         ))}
                       </ul>
                     </div>
@@ -452,7 +460,7 @@ const Services: React.FC = () => {
                     <div className="text-center mt-auto pt-4">
                       <a 
                         href="#contact" 
-                        className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg relative"
+                        className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-6 py-2 rounded-lg transition-colors text-base relative"
                       >
                         {/* 3D Button effect */}
                         <div className="absolute inset-0 bg-royal-800 opacity-0 hover:opacity-30 rounded-lg transform translate-y-1"></div>
