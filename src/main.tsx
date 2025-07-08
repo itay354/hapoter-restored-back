@@ -17,14 +17,20 @@ if (!rootElement) {
   console.log('Creating React root...');
   const root = createRoot(rootElement);
   console.log('Rendering App...');
-  root.render(
-    <React.StrictMode>
-      <HelmetProvider>
-        <ContentProvider>
-          <App />
-        </ContentProvider>
-      </HelmetProvider>
-    </React.StrictMode>
-  );
-  console.log('App rendered successfully!');
+  
+  try {
+    root.render(
+      <React.StrictMode>
+        <HelmetProvider>
+          <ContentProvider>
+            <App />
+          </ContentProvider>
+        </HelmetProvider>
+      </React.StrictMode>
+    );
+    console.log('App rendered successfully!');
+  } catch (error) {
+    console.error('Failed to render app:', error);
+    document.body.innerHTML = '<h1 style="color: red; text-align: center; margin-top: 50px;">שגיאה בטעינת האפליקציה</h1>';
+  }
 }

@@ -81,7 +81,7 @@ const Examples: React.FC = () => {
   }, [EXAMPLES_DATA]); // תלוי ב-EXAMPLES_DATA
 
   // Handle divider position change - useCallback למניעת re-creation
-  const handleDividerChange = useCallback((category: string, index: number, position: number) => {
+  const handleDividerChange = useCallback((category: string, index: number, position: number): void => {
     const key = `${category}-${index}`;
     setDividerPositions(prev => ({
       ...prev,

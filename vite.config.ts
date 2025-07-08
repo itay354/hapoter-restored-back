@@ -4,18 +4,22 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    include: ['lucide-react'],
   },
   server: {
     port: 5173,
     host: true,
     strictPort: false,
+    hmr: {
+      overlay: false
+    },
     fs: {
       allow: ['..'],
     },
   },
   build: {
     outDir: 'dist',
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: undefined,
@@ -23,8 +27,7 @@ export default defineConfig({
     },
   },
   esbuild: {
-    loader: 'tsx',
-    include: /src\/.*\.[tj]sx?$/,
-    exclude: [],
+    target: 'es2020',
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
   },
 });
