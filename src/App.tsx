@@ -17,8 +17,6 @@ import { useContent } from './components/ContentManager';
 const AppContent: React.FC = () => {
   const { content } = useContent();
   
-  console.log('App component rendering with content:', content);
-  
   return (
     <div className="min-h-screen bg-white" dir="rtl">
       <SEOHelmet 
@@ -42,8 +40,6 @@ const AppContent: React.FC = () => {
 };
 
 function App() {
-  console.log('App component loaded successfully!');
-  
   return <AppContent />;
 }
 

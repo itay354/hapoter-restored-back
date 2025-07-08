@@ -5,30 +5,80 @@ import App from './App';
 import { ContentProvider } from './components/ContentManager';
 import './index.css';
 
-console.log('Starting application...');
+// Error boundary component
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; error?: Error }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          height: '100vh',
+          padding: '20px',
+          textAlign: 'center'
+        }}>
+          <h1 style={{ color: '#ef4444', marginBottom: '20px' }}>שגיאה בטעינת האפליקציה</h1>
+          <p style={{ color: '#6b7280', marginBottom: '20px' }}>
+            {this.state.error?.message || 'אירעה שגיאה לא צפויה'}
+          </p>
+          <button 
+            onClick={() => window.location.reload()} 
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#3b82f6',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer'
+            }}
+          >
+            רענן דף
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 const rootElement = document.getElementById('root');
-console.log('Root element:', rootElement);
 
 if (!rootElement) {
-  console.error('Root element not found!');
   document.body.innerHTML = '<h1 style="color: red; text-align: center; margin-top: 50px;">שגיאה: לא נמצא אלמנט root</h1>';
 } else {
-  console.log('Creating React root...');
   const root = createRoot(rootElement);
-  console.log('Rendering App...');
   
   try {
     root.render(
       <React.StrictMode>
-        <HelmetProvider>
-          <ContentProvider>
-            <App />
-          </ContentProvider>
-        </HelmetProvider>
+        <ErrorBoundary>
+          <HelmetProvider>
+            <ContentProvider>
+              <App />
+            </ContentProvider>
+          </HelmetProvider>
+        </ErrorBoundary>
       </React.StrictMode>
     );
-    console.log('App rendered successfully!');
   } catch (error) {
     console.error('Failed to render app:', error);
     document.body.innerHTML = '<h1 style="color: red; text-align: center; margin-top: 50px;">שגיאה בטעינת האפליקציה</h1>';
