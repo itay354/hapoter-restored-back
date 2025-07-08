@@ -35,11 +35,13 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
   const handleDrag = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     if (!dragging || !containerRef.current) return;
     
-    let clientX: number;
+    let clientX: number = 0;
     
     if ('touches' in e) {
       // Touch event
-      clientX = e.touches[0].clientX;
+      if (e.touches && e.touches[0]) {
+        clientX = e.touches[0].clientX;
+      }
     } else {
       // Mouse event
       clientX = e.clientX;
