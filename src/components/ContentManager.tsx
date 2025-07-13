@@ -42,7 +42,7 @@ const defaultContent: ContentData = {
 // Context
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
-// Provider component - רק הכרחי
+// Provider component
 export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [content] = useState<ContentData>(defaultContent);
   const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
@@ -59,7 +59,6 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   return (
     <ContentContext.Provider value={{ content, updateContent, openAdminLogin }}>
       {children}
-      {/* רק אם לחצו על הכפתור */}
       {isAdminLoginOpen && (
         <AdminLogin 
           onClose={() => setIsAdminLoginOpen(false)} 
@@ -107,12 +106,10 @@ const AdminLogin: React.FC<{
     }
   };
 
-  // אם מאושר, הצג פאנל אדמין
   if (isAuthenticated) {
     return <AdminPanel onClose={onSuccess} />;
   }
 
-  // אחרת, הצג מסך לוגין
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg w-full max-w-md p-6">
@@ -169,7 +166,6 @@ const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
   const handleImageUpload = (key: string, file: File) => {
     try {
-      // Create object URL for preview
       const imageUrl = URL.createObjectURL(file);
       setEditedContent(prev => ({
         ...prev,
@@ -193,7 +189,6 @@ const AdminPanel: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           </button>
         </div>
 
-        {/* Tabs */}
         <div className="flex border-b">
           <button
             onClick={() => setActiveTab('content')}

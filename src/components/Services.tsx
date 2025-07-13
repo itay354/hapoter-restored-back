@@ -8,11 +8,14 @@ const Services: React.FC = () => {
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0, width: 0 });
   const serviceRefs = useRef<(HTMLDivElement | null)[]>([]);
   
-  // פונקציה להכנת מערך התמונות והסרטונים מהמערכת
   const getAllMediaFiles = () => {
-    const mediaFiles = [];
+    const mediaFiles: Array<{
+      type: string;
+      url: string;
+      title: string;
+      alt: string;
+    }> = [];
     
-    // הוספת תמונות מ-content.images
     Object.entries(content.images).forEach(([key, url]) => {
       if (url && url.trim()) {
         mediaFiles.push({
@@ -24,7 +27,6 @@ const Services: React.FC = () => {
       }
     });
     
-    // הוספת וידאוים נוספים
     const additionalVideos = [
       {
         type: 'video',
@@ -51,7 +53,6 @@ const Services: React.FC = () => {
     return mediaFiles;
   };
 
-  // חישוב מיקום הפופאפ על פי הקוביה שנבחרה
   useEffect(() => {
     if (selectedService !== null && serviceRefs.current[selectedService]) {
       const serviceCard = serviceRefs.current[selectedService];
@@ -59,16 +60,14 @@ const Services: React.FC = () => {
       const containerRect = serviceCard.closest('.container')?.getBoundingClientRect();
       
       if (containerRect) {
-        // חישוב מיקום יחסי לקונטיינר
         const cardLeft = rect.left - containerRect.left;
         const cardBottom = rect.bottom - containerRect.top;
         const cardWidth = rect.width;
         
-        // בדיקה אם זו קוביה תחתונה (אינדקסים 2,3)
         const isBottomRow = selectedService >= 2;
         
         setPopupPosition({
-          top: isBottomRow ? cardBottom - 520 : cardBottom + 20, // למעלה או למטה + מרווח מותאם
+          top: isBottomRow ? cardBottom - 520 : cardBottom + 20,
           left: cardLeft,
           width: cardWidth
         });
@@ -76,12 +75,9 @@ const Services: React.FC = () => {
     }
   }, [selectedService]);
 
-  // פונקציה לטיפול בתמונות שלא נטענות
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
-    target.onerror = null; // מניעת לופ אין-סופי
-    
-    // fallback לתמונה כללית
+    target.onerror = null;
     target.src = "https://images.pexels.com/photos/3379942/pexels-photo-3379942.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
     target.alt = "תמונת ברירת מחדל לשירות";
   };
@@ -174,7 +170,6 @@ const Services: React.FC = () => {
     }
   ];
 
-
   const handleServiceClick = (index: number) => {
     setSelectedService(index === selectedService ? null : index);
   };
@@ -185,36 +180,6 @@ const Services: React.FC = () => {
 
   return (
     <section id="services" className="py-16 md:py-24 bg-peach-100 relative overflow-hidden">
-      {/* 3D Geometric shapes */}
-      <div className="absolute top-0 left-0 w-0 h-0 border-l-[120px] border-t-[120px] border-l-transparent border-t-coral-100 opacity-50"></div>
-      <div className="absolute top-40 right-10 w-32 h-32 bg-royal-100 rounded-tl-3xl rounded-br-3xl opacity-30 transform rotate-12"></div>
-      
-      {/* 3D Floating Cubes */}
-      <div className="absolute bottom-20 right-20 w-16 h-16 bg-coral-200 opacity-40 transform rotate-45 animate-float"></div>
-      <div className="absolute bottom-40 right-40 w-12 h-12 bg-royal-200 opacity-30 transform rotate-12 animate-float" style={{animationDelay: '1s'}}></div>
-      <div className="absolute top-20 left-20 w-20 h-20 bg-sky-200 opacity-20 transform -rotate-12 animate-float" style={{animationDelay: '1.5s'}}></div>
-      
-      {/* 3D Pyramids */}
-      <div className="absolute bottom-10 left-10 w-0 h-0 border-l-[40px] border-r-[40px] border-b-[80px] border-l-transparent border-r-transparent border-b-coral-200 opacity-30 transform"></div>
-      <div className="absolute top-1/2 left-1/3 w-0 h-0 border-l-[30px] border-r-[30px] border-b-[60px] border-l-transparent border-r-transparent border-b-royal-200 opacity-20 transform rotate-45"></div>
-      
-      {/* New 3D Elements */}
-      {/* 3D Spheres with gradients */}
-      <div className="absolute top-1/3 right-1/3 w-48 h-48 rounded-full opacity-20" 
-           style={{background: 'radial-gradient(circle, rgba(234,158,140,0.3) 0%, rgba(234,158,140,0) 70%)'}}></div>
-      <div className="absolute bottom-1/3 left-1/3 w-64 h-64 rounded-full opacity-20"
-           style={{background: 'radial-gradient(circle, rgba(79,84,255,0.2) 0%, rgba(79,84,255,0) 70%)'}}></div>
-      
-      {/* 3D Stacked Cubes */}
-      <div className="absolute top-2/3 left-10 w-20 h-20 bg-royal-200 transform rotate-45 skew-x-12 skew-y-12 opacity-20"></div>
-      <div className="absolute top-2/3 left-14 w-20 h-20 bg-coral-200 transform rotate-45 skew-x-12 skew-y-12 opacity-15"></div>
-      <div className="absolute top-2/3 left-18 w-20 h-20 bg-sky-200 transform rotate-45 skew-x-12 skew-y-12 opacity-10"></div>
-      
-      {/* 3D Cylinders */}
-      <div className="absolute bottom-1/4 right-10 w-20 h-8 bg-coral-200 rounded-full opacity-30"></div>
-      <div className="absolute bottom-1/4 right-10 w-20 h-16 bg-coral-200 opacity-20 transform translate-y-4"></div>
-      <div className="absolute bottom-1/4 right-10 w-20 h-8 bg-coral-200 rounded-full opacity-30 transform translate-y-20"></div>
-      
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="text-royal-600 font-medium mb-2 block">השירותים שלנו</span>
@@ -227,7 +192,6 @@ const Services: React.FC = () => {
           </p>
         </div>
 
-        {/* גריד 2x2 - תמיד 2 עמודות בדסקטופ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-8">
           {services.map((service, index) => (
             <React.Fragment key={index}>
@@ -239,10 +203,6 @@ const Services: React.FC = () => {
                 style={{ animationDelay: `${index * 0.1}s` }}
                 onClick={() => handleServiceClick(index)}
               >
-                {/* 3D Card effects */}
-                <div className="absolute -top-2 -right-2 w-full h-full bg-royal-200 opacity-0 hover:opacity-10 transition-opacity rounded-xl transform hover:rotate-1"></div>
-                <div className="absolute -bottom-2 -left-2 w-full h-full bg-coral-200 opacity-0 hover:opacity-10 transition-opacity rounded-xl transform hover:-rotate-1"></div>
-                
                 <div className="relative">
                   <div className="aspect-video">
                     <img 
@@ -253,8 +213,6 @@ const Services: React.FC = () => {
                     />
                   </div>
                   <div className={`${service.bgColor} rounded-full p-4 absolute -bottom-6 right-6 relative`}>
-                    {/* 3D Icon effect with shadow */}
-                    <div className="absolute inset-0 rounded-full bg-black opacity-10 transform translate-x-1 translate-y-1"></div>
                     <div className="relative">
                       {service.icon}
                     </div>
@@ -265,7 +223,6 @@ const Services: React.FC = () => {
                   <p className="text-gray-600">{service.description}</p>
                 </div>
                 
-                {/* אינדיקטור חיבור - חץ למטה */}
                 {selectedService === index && (
                   <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-4 z-40">
                     <div className="w-8 h-8 bg-white transform rotate-45 border-b border-r border-gray-200 shadow-lg"></div>
@@ -276,7 +233,6 @@ const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Detailed view - ממוקם מתחת לקוביה שנבחרה */}
         {selectedService !== null && (
           <div 
             className="absolute bg-white rounded-xl shadow-2xl p-8 transition-all duration-500 animate-fade-in z-50"
@@ -291,7 +247,6 @@ const Services: React.FC = () => {
               zIndex: 9999
             }}
           >
-            {/* חץ מחבר דינמי */}
             <div className={`absolute left-1/2 transform -translate-x-1/2 z-30 ${
               selectedService >= 2 ? '-bottom-4' : '-top-4'
             }`}>
@@ -301,12 +256,7 @@ const Services: React.FC = () => {
                   : 'border-t border-l border-gray-200'
               }`}></div>
             </div>
-
-            {/* 3D Decorative elements */}
-            <div className="absolute top-0 right-0 w-24 h-24 bg-royal-100 opacity-15 transform rotate-45 translate-x-12 -translate-y-12"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-coral-100 opacity-15 transform rotate-45 -translate-x-12 translate-y-12"></div>
             
-            {/* Close button with X icon */}
             <button 
               onClick={(e) => {
                 e.stopPropagation();
@@ -319,10 +269,8 @@ const Services: React.FC = () => {
             </button>
             
             <div className="relative z-10 h-full">
-              {/* תצוגה מיוחדת עבור "הפקת תמונות ווידאו" ו"אפיון UX" */}
               {(selectedService === 1 || selectedService === 3) ? (
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-full">
-                  {/* עמודת תוכן - 3/5 מהמקום */}
                   <div className="lg:col-span-3 flex flex-col">
                     <h3 className="text-3xl font-bold text-royal-600 mb-4">
                       {services[selectedService].title}
@@ -346,18 +294,14 @@ const Services: React.FC = () => {
                         href="#contact" 
                         className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg relative"
                       >
-                        {/* 3D Button effect */}
-                        <div className="absolute inset-0 bg-royal-800 opacity-0 hover:opacity-30 rounded-lg transform translate-y-1"></div>
                         <span className="relative">קבלו הצעת מחיר לשירות זה</span>
                       </a>
                     </div>
                   </div>
                   
-                  {/* עמודת תמונות וסרטונים - 2/5 מהמקום עם גלילה פנימית */}
                   <div className="lg:col-span-2 flex flex-col h-full">
                     <h4 className="font-bold text-xl text-royal-600 mb-4">כל התמונות והסרטונים במערכת:</h4>
                     
-                    {/* אזור הגלילה */}
                     <div className="flex-grow overflow-hidden bg-gray-50 rounded-lg p-3 border border-gray-200" style={{height: '300px'}}>
                       <div 
                         className="h-full overflow-y-scroll space-y-4 pr-2" 
@@ -368,8 +312,6 @@ const Services: React.FC = () => {
                       >
                         {getAllMediaFiles().map((media, i) => (
                           <div key={i} className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow relative bg-white border border-gray-100">
-                            {/* 3D Image effect */}
-                            <div className="absolute -top-1 -right-1 w-full h-full bg-royal-200 opacity-0 hover:opacity-10 transition-opacity rounded-lg transform rotate-1"></div>
                             <div className="relative">
                               {media.type === 'video' ? (
                                 <div className="relative">
@@ -393,7 +335,6 @@ const Services: React.FC = () => {
                                   >
                                     <source src={media.url} type="video/mp4" />
                                   </video>
-                                  {/* סמל וידאו */}
                                   <div className="absolute top-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-xs">
                                     🎬 וידאו
                                   </div>
@@ -418,7 +359,6 @@ const Services: React.FC = () => {
                           </div>
                         ))}
                         
-                        {/* הודעה אם אין תמונות */}
                         {getAllMediaFiles().length === 0 && (
                           <div className="text-center text-gray-400 py-8">
                             <div className="text-2xl mb-2">📁</div>
@@ -428,7 +368,6 @@ const Services: React.FC = () => {
                       </div>
                     </div>
                     
-                    {/* מידע על הגלילה */}
                     <div className="mt-3 text-xs text-gray-500 text-center bg-white rounded px-2 py-1">
                       <p>סך הכל: {getAllMediaFiles().length} קבצי מדיה</p>
                       <p className="text-gray-400">⬇️ גללו כאן לצפייה ⬇️</p>
@@ -436,9 +375,7 @@ const Services: React.FC = () => {
                   </div>
                 </div>
               ) : (
-                /* תצוגה רגילה עבור שאר השירותים */
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-full">
-                  {/* עמודת תוכן - 3/5 מהמקום */}
                   <div className="lg:col-span-3 flex flex-col">
                     <h3 className="text-3xl font-bold text-royal-600 mb-4">
                       {services[selectedService].title}
@@ -462,21 +399,16 @@ const Services: React.FC = () => {
                         href="#contact" 
                         className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-6 py-2 rounded-lg transition-colors text-base relative"
                       >
-                        {/* 3D Button effect */}
-                        <div className="absolute inset-0 bg-royal-800 opacity-0 hover:opacity-30 rounded-lg transform translate-y-1"></div>
                         <span className="relative">קבלו הצעת מחיר לשירות זה</span>
                       </a>
                     </div>
                   </div>
                   
-                  {/* עמודת תמונות רגילה - 2/5 מהמקום */}
                   <div className="lg:col-span-2 flex flex-col">
                     <h4 className="font-bold text-xl text-royal-600 mb-4">דוגמאות מהעבודות שלנו:</h4>
                     <div className="space-y-4 flex-grow">
                       {services[selectedService].detailedContent.images.map((img, i) => (
                         <div key={i} className="rounded-lg overflow-hidden shadow-md transform transition-transform hover:scale-105 relative">
-                          {/* 3D Image effect */}
-                          <div className="absolute -top-1 -right-1 w-full h-full bg-royal-200 opacity-0 hover:opacity-20 transition-opacity rounded-lg transform rotate-1"></div>
                           <div className="relative">
                             <img 
                               src={img} 
@@ -488,7 +420,6 @@ const Services: React.FC = () => {
                         </div>
                       ))}
                       
-                      {/* תמונה נוספת אם יש פחות מ-3 תמונות */}
                       {services[selectedService].detailedContent.images.length < 3 && (
                         <div className="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 h-40 flex items-center justify-center">
                           <div className="text-center text-gray-400">
@@ -510,8 +441,6 @@ const Services: React.FC = () => {
             href="#contact" 
             className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-8 py-3 rounded-lg transition-colors relative"
           >
-            {/* 3D Button effect */}
-            <div className="absolute inset-0 bg-royal-800 opacity-0 hover:opacity-30 rounded-lg transform translate-y-1"></div>
             <span className="relative">קבלו הצעת מחיר</span>
           </a>
         </div>

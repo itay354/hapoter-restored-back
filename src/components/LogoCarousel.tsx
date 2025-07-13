@@ -7,7 +7,6 @@ interface Logo {
   name: string;
 }
 
-// רק לוגואים שקיימים בפועל במערכת
 const logos: Logo[] = [
   { 
     id: '1', 
@@ -23,52 +22,15 @@ const logos: Logo[] = [
   },
   { 
     id: '3', 
-    src: '/assets/logo-itay.png', 
-    alt: 'איתי קורוניו - לוגו ראשי', 
-    name: 'איתי קורוניו'
-  },
-  { 
-    id: '4', 
     src: '/assets/-a-modern-and-professional-logo-for--koronyo-studi.svg', 
     alt: 'סטודיו קורוניו - לוגו מודרני', 
     name: 'סטודיו קורוניו'
   },
   { 
-    id: '5', 
-    src: '/assets/hapoter-logo-icon.svg', 
-    alt: 'הפותר - אייקון לוגו', 
-    name: 'הפותר - אייקון'
-  },
-  { 
-    id: '6', 
-    src: '/assets/hapoter-custom-logo.svg', 
-    alt: 'הפותר - לוגו מותאם אישית', 
-    name: 'הפותר - מותאם אישית'
-  },
-  // הוספת לוגואים נוספים שקיימים
-  { 
-    id: '7', 
+    id: '4', 
     src: '/assets/generated_image.png', 
     alt: 'תמונה שנוצרה באמצעות AI', 
     name: 'דוגמה ליצירת AI'
-  },
-  { 
-    id: '8', 
-    src: '/assets/generated_image (1).png', 
-    alt: 'תמונה שנוצרה באמצעות AI - גרסה 1', 
-    name: 'יצירת AI - גרסה 1'
-  },
-  { 
-    id: '9', 
-    src: '/assets/generated_image (2).png', 
-    alt: 'תמונה שנוצרה באמצעות AI - גרסה 2', 
-    name: 'יצירת AI - גרסה 2'
-  },
-  { 
-    id: '10', 
-    src: '/assets/generated_image (3).png', 
-    alt: 'תמונה שנוצרה באמצעות AI - גרסה 3', 
-    name: 'יצירת AI - גרסה 3'
   },
 ];
 
@@ -77,23 +39,19 @@ const LogoCarousel: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
-  // יצירת זוגות של לוגואים (2 בכל שקף)
   const logoGroups = [];
   for (let i = 0; i < logos.length; i += 2) {
     logoGroups.push(logos.slice(i, i + 2));
   }
 
-  // פונקציה לטיפול בתמונות שלא נטענות
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>, logoId: string) => {
     const target = e.target as HTMLImageElement;
-    target.onerror = null; // מניעת לופ אין-סופי
+    target.onerror = null;
     
     console.warn(`Failed to load logo: ${target.src}`);
     
-    // הסתרת התמונה שלא נטענה
     target.style.display = 'none';
     
-    // הוספת טקסט חלופי
     const parent = target.parentElement;
     if (parent && !parent.querySelector('.fallback-text')) {
       const fallbackDiv = document.createElement('div');
@@ -105,7 +63,6 @@ const LogoCarousel: React.FC = () => {
   };
 
   useEffect(() => {
-    // טעינה מוקדמת של כל התמונות
     const preloadImages = async () => {
       const imagePromises = logos.map((logo) => {
         return new Promise<string>((resolve, reject) => {
@@ -163,10 +120,6 @@ const LogoCarousel: React.FC = () => {
 
   return (
     <div className="bg-white rounded-xl shadow-xl overflow-hidden p-8 relative">
-      {/* 3D Card effects */}
-      <div className="absolute -top-4 -right-4 w-full h-full bg-royal-200 opacity-10 rounded-xl transform rotate-1"></div>
-      <div className="absolute -bottom-4 -left-4 w-full h-full bg-coral-200 opacity-10 rounded-xl transform -rotate-1"></div>
-      
       <div className="relative z-10">
         <div className="text-center mb-8">
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -177,7 +130,6 @@ const LogoCarousel: React.FC = () => {
           </p>
         </div>
         
-        {/* אזור התצוגה הראשי - 2 לוגואים בכל שקף */}
         <div className="relative overflow-hidden mb-6" style={{ height: '400px' }}>
           <div 
             className="flex transition-transform duration-700 ease-in-out h-full"
@@ -195,10 +147,6 @@ const LogoCarousel: React.FC = () => {
                 {group.map((logo) => (
                   <div key={logo.id} className="flex flex-col items-center justify-center">
                     <div className="relative mb-4 group">
-                      {/* 3D frame effect */}
-                      <div className="absolute -top-3 -right-3 w-full h-full bg-royal-200 opacity-0 group-hover:opacity-20 rounded-lg transform rotate-2 transition-opacity"></div>
-                      <div className="absolute -bottom-3 -left-3 w-full h-full bg-coral-200 opacity-0 group-hover:opacity-20 rounded-lg transform -rotate-2 transition-opacity"></div>
-                      
                       <div className="relative bg-white p-3 rounded-lg shadow-md border border-gray-100 transform group-hover:scale-105 transition-transform">
                         {loadedImages.has(logo.id) ? (
                           <img
@@ -223,7 +171,6 @@ const LogoCarousel: React.FC = () => {
                   </div>
                 ))}
                 
-                {/* אם יש רק לוגו אחד בקבוצה, נוסיף מקום לפרויקט הבא */}
                 {group.length === 1 && (
                   <div className="flex flex-col items-center justify-center opacity-30">
                     <div className="relative mb-4">
@@ -242,14 +189,12 @@ const LogoCarousel: React.FC = () => {
           </div>
         </div>
         
-        {/* מידע על הקרוסלה */}
         <div className="text-center mb-4">
           <p className="text-sm text-gray-500">
             שקף {currentIndex + 1} מתוך {logoGroups.length} | סך הכל {logos.length} לוגואים | נטענו: {loadedImages.size}
           </p>
         </div>
         
-        {/* אינדיקטורים עם מספרים */}
         <div className="flex justify-center space-x-2 space-x-reverse mb-6 overflow-x-auto scrollbar-hide">
           {logoGroups.map((_, index) => (
             <button
@@ -261,14 +206,11 @@ const LogoCarousel: React.FC = () => {
                   : 'bg-gray-300 hover:bg-gray-400 text-gray-600'
               }`}
             >
-              {/* 3D button effect */}
-              <div className="absolute inset-0 rounded-full bg-black opacity-0 hover:opacity-10 transform translate-y-1"></div>
               <span className="relative">{index + 1}</span>
             </button>
           ))}
         </div>
         
-        {/* כפתורי ניווט */}
         <div className="flex justify-center space-x-4 space-x-reverse mb-6">
           <button
             onClick={() => navigateToSlide((currentIndex - 1 + logoGroups.length) % logoGroups.length)}
@@ -284,14 +226,11 @@ const LogoCarousel: React.FC = () => {
           </button>
         </div>
         
-        {/* כפתור CTA */}
         <div className="text-center">
           <a 
             href="#contact" 
             className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-6 py-3 rounded-lg transition-colors relative"
           >
-            {/* 3D Button effect */}
-            <div className="absolute inset-0 bg-royal-800 opacity-0 hover:opacity-30 rounded-lg transform translate-y-1"></div>
             <span className="relative">רוצים לוגו דומה? צרו קשר</span>
           </a>
         </div>
