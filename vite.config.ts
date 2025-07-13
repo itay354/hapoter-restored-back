@@ -21,8 +21,6 @@ export default defineConfig({
     },
     hmr: {
       overlay: false,
-      port: 24678,
-    },
     fs: {
       allow: ['..'],
     },
