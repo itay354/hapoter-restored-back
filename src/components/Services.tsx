@@ -310,7 +310,13 @@ const Services: React.FC = () => {
                           scrollbarColor: '#6366f1 #e2e8f0'
                         }}
                       >
-                        {getAllMediaFiles().map((media, i) => (
+                        {getAllMediaFiles().filter(media => 
+                          media.url.includes('video') || 
+                          media.url.includes('tanti') ||
+                          media.url.includes('garry') ||
+                          media.url.includes('upscaled') ||
+                          media.url.includes('WhatsApp')
+                        ).map((media, i) => (
                           <div key={i} className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow relative bg-white border border-gray-100">
                             <div className="relative">
                               {media.type === 'video' ? (
@@ -359,7 +365,13 @@ const Services: React.FC = () => {
                           </div>
                         ))}
                         
-                        {getAllMediaFiles().length === 0 && (
+                        {getAllMediaFiles().filter(media => 
+                          media.url.includes('video') || 
+                          media.url.includes('tanti') ||
+                          media.url.includes('garry') ||
+                          media.url.includes('upscaled') ||
+                          media.url.includes('WhatsApp')
+                        ).length === 0 && (
                           <div className="text-center text-gray-400 py-8">
                             <div className="text-2xl mb-2">📁</div>
                             <p className="text-sm">אין תמונות או סרטונים זמינים</p>
@@ -369,7 +381,13 @@ const Services: React.FC = () => {
                     </div>
                     
                     <div className="mt-3 text-xs text-gray-500 text-center bg-white rounded px-2 py-1">
-                      <p>סך הכל: {getAllMediaFiles().length} קבצי מדיה</p>
+                      <p>סך הכל: {getAllMediaFiles().filter(media => 
+                        media.url.includes('video') || 
+                        media.url.includes('tanti') ||
+                        media.url.includes('garry') ||
+                        media.url.includes('upscaled') ||
+                        media.url.includes('WhatsApp')
+                      ).length} קבצי מדיה רלוונטיים</p>
                       <p className="text-gray-400">⬇️ גללו כאן לצפייה ⬇️</p>
                     </div>
                   </div>

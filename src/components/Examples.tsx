@@ -23,20 +23,28 @@ const Examples: React.FC = () => {
     ],
     videos: [
       {
-        before: content.images.image1 || "/assets/tanti model before.jpg",
-        after: content.images.image2 || "/assets/tanti model after.jpg",
-        title: "עריכת וידאו",
-        type: "video",
-        videoUrl: "/videos/first-model.mp4#t=3"
-      },
-      {
-        before: content.images.before3 || "/assets/tanti model before.jpg",
-        after: content.images.after3 || "/assets/tanti model after.jpg",
-        title: "הנפשת תמונה לוידאו - הדמיית Tanti Model",
+        before: "/assets/tanti model before.jpg",
+        after: "/assets/tanti model after.jpg", 
+        title: "הנפשת דוגמנית - מתמונה לוידאו",
         type: "video",
         videoUrl: "/videos/doogmanit-video.mp4#t=3",
         posterImage: "/assets/tanti model after.jpg"
       },
+      {
+        before: "/assets/logo-transparent-garry.svg",
+        after: "/assets/logo-with-mockup-garry.jpg",
+        title: "פרסומת גארי גלינר - מלוגו לסרטון",
+        type: "video",
+        videoUrl: "/videos/garry first video ad.mp4#t=3",
+        posterImage: "/assets/logo-with-mockup-garry.jpg"
+      },
+      {
+        before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
+        after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
+        title: "עיבוד תמונות מקצועי",
+        type: "video",
+        videoUrl: "/videos/regular model turns to video.mp4#t=3"
+      }
     ],
     mockups: [
       {
