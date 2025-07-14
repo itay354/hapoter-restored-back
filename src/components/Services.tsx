@@ -16,7 +16,8 @@ const Services: React.FC = () => {
       alt: string;
     }> = [];
     
-    Object.entries(content.images).forEach(([key, url]) => {
+    // תמונות מה-ContentManager
+    Object.entries(content.images || {}).forEach(([key, url]) => {
       if (url && url.trim()) {
         mediaFiles.push({
           type: url.includes('.mp4') || url.includes('video') ? 'video' : 'image',
@@ -30,21 +31,27 @@ const Services: React.FC = () => {
     const additionalVideos = [
       {
         type: 'video',
-        url: '/videos/first-model.mp4',
-        title: 'דגם ראשון - סרטון',
-        alt: 'סרטון הדמיה ראשון'
+        url: '/assets/services/images-video/videos/garry first video ad.mp4',
+        title: 'פרסומת גארי גלינר',
+        alt: 'סרטון פרסומת גארי גלינר'
       },
       {
         type: 'video',
-        url: '/videos/doogmanit-video.mp4',
-        title: 'הנפשת דוגמנית',
-        alt: 'סרטון הנפשת דוגמנית'
+        url: '/assets/services/images-video/videos/regular model turns to video.mp4',
+        title: 'עיבוד תמונות לוידאו',
+        alt: 'סרטון עיבוד תמונות לוידאו'
       },
       {
         type: 'video',
-        url: '/videos/compressed-hapoter-video copy.mp4',
-        title: 'וידאו הפותר',
-        alt: 'סרטון הפותר המרכזי'
+        url: '/assets/services/images-video/videos/black model turned to video.mp4',
+        title: 'הנפשת דמויות',
+        alt: 'סרטון הנפשת דמויות'
+      },
+      {
+        type: 'image',
+        url: '/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg',
+        title: 'תמונה מעובדת באיכות גבוהה',
+        alt: 'תמונה מעובדת עם רקע מטושטש'
       }
     ];
     
