@@ -11,8 +11,8 @@ const Examples: React.FC = () => {
   const EXAMPLES_DATA = useMemo(() => ({
     images: [
       {
-        before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg",
+        before: "/assets/tanti%20model%20before.jpg",
+        after: "/assets/tanti%20model%20after.jpg",
         title: 'אותם בגדים - שינוי דוגמנית לפי דרישה'
       },
       {
@@ -22,39 +22,39 @@ const Examples: React.FC = () => {
       },
       {
         before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
-        after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
+        after: "/assets/services/images-video/examples/WhatsApp%20Image%202025-01-11%20at%2022.50.40_3e0b1e38.jpg",
         title: "יצירת מוקאפים"
       },
       {
-        before: "/assets/be there - before.png",
-        after: "/assets/be there after.png",
+        before: "/assets/be%20there%20-%20before.png",
+        after: "/assets/be%20there%20after.png",
         title: "מערכת השמת כ\"א - מסקיצה למוקאפ"
       }
     ],
     videos: [
       {
-        before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg",
+        before: "/assets/tanti%20model%20before.jpg",
+        after: "/assets/tanti%20model%20after.jpg",
         title: "פרסומת גארי גלינר - מלוגו לסרטון",
         type: "video",
-        videoUrl: "/assets/services/images-video/videos/garry first video ad.mp4",
-        posterImage: "/assets/tanti model after.jpg"
+        videoUrl: "/assets/services/images-video/videos/garry%20first%20video%20ad.mp4",
+        posterImage: "/assets/tanti%20model%20after.jpg"
       },
       {
-        before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg",
+        before: "/assets/tanti%20model%20before.jpg",
+        after: "/assets/tanti%20model%20after.jpg",
         title: "עיבוד תמונות לוידאו",
         type: "video",
-        videoUrl: "/assets/services/images-video/videos/regular model turns to video.mp4",
-        posterImage: "/assets/tanti model after.jpg"
+        videoUrl: "/assets/services/images-video/videos/regular%20model%20turns%20to%20video.mp4",
+        posterImage: "/assets/tanti%20model%20after.jpg"
       },
       {
         before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
-        after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
+        after: "/assets/services/images-video/examples/WhatsApp%20Image%202025-01-11%20at%2022.50.40_3e0b1e38.jpg",
         title: "הנפשת דמויות",
         type: "video",
-        videoUrl: "/assets/services/images-video/videos/black model turned to video.mp4",
-        posterImage: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg"
+        videoUrl: "/assets/services/images-video/videos/black%20model%20turned%20to%20video.mp4",
+        posterImage: "/assets/services/images-video/examples/WhatsApp%20Image%202025-01-11%20at%2022.50.40_3e0b1e38.jpg"
       },
       {
         before: "/assets/logo-transparent-garry.svg",
@@ -68,7 +68,7 @@ const Examples: React.FC = () => {
     mockups: [
       {
         before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
-        after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
+        after: "/assets/services/images-video/examples/WhatsApp%20Image%202025-01-11%20at%2022.50.40_3e0b1e38.jpg",
         title: "יצירת מוקאפים"
       },
       {
@@ -77,13 +77,13 @@ const Examples: React.FC = () => {
         title: "עיצוב לוגו והטמעתו כמוקאפ על משקולת"
       },
       {
-        before: "/assets/be there - before.png",
-        after: "/assets/be there after.png",
+        before: "/assets/be%20there%20-%20before.png",
+        after: "/assets/be%20there%20after.png",
         title: "מערכת השמת כ\"א - מסקיצה למוקאפ"
       },
       {
-        before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg",
+        before: "/assets/tanti%20model%20before.jpg",
+        after: "/assets/tanti%20model%20after.jpg",
         title: "שינוי דוגמנית - הוספה למוקאפ"
       },
       {
