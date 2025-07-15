@@ -16,13 +16,13 @@ const Examples: React.FC = () => {
         title: 'אותם בגדים - שינוי דוגמנית לפי דרישה'
       },
       {
-        before: "/assets/Slide3.PNG",
-        after: "/assets/image copy copy.png",
+        before: "/assets/slide2-before.png/Slide2.PNG",
+        after: "/assets/slide2-after.png/Slide2.PNG",
         title: "מצגת עסקית - שיפור מקצועי"
       },
       {
-        before: "/assets/player.jpg",
-        after: "/assets/generated_image.png",
+        before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
+        after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
         title: "יצירת מוקאפים"
       },
       {
@@ -67,8 +67,8 @@ const Examples: React.FC = () => {
     ],
     mockups: [
       {
-        before: "/assets/player.jpg",
-        after: "/assets/generated_image.png",
+        before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
+        after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
         title: "יצירת מוקאפים"
       },
       {
@@ -87,8 +87,8 @@ const Examples: React.FC = () => {
         title: "שינוי דוגמנית - הוספה למוקאפ"
       },
       {
-        before: "/assets/Slide3.PNG",
-        after: "/assets/image copy copy.png",
+        before: "/assets/slide2-before.png/Slide2.PNG",
+        after: "/assets/slide2-after.png/Slide2.PNG",
         title: "מצגת עסקית - מוקאפ מקצועי"
       }
     ],
