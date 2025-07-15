@@ -52,19 +52,19 @@ const Services: React.FC = () => {
       // סרטוני וידאו
       {
         type: 'video',
-        url: '/videos/garry%20first%20video%20ad.mp4',
+        url: '/videos/garry first video ad.mp4',
         title: 'פרסומת גארי גלינר',
         alt: 'סרטון פרסומת גארי גלינר'
       },
       {
         type: 'video',
-        url: '/videos/regular%20model%20turns%20to%20video.mp4',
+        url: '/videos/regular model turns to video.mp4',
         title: 'עיבוד תמונות לוידאו',
         alt: 'סרטון עיבוד תמונות לוידאו'
       },
       {
         type: 'video',
-        url: '/videos/black%20model%20turned%20to%20video.mp4',
+        url: '/videos/black model turned to video.mp4',
         title: 'הנפשת דמויות',
         alt: 'סרטון הנפשת דמויות'
       },
@@ -339,7 +339,7 @@ const Services: React.FC = () => {
                         <div className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow relative bg-white border border-gray-100">
                           <div className="relative">
                             <img 
-                              src="/assets/tanti%20model%20before.jpg" 
+                              src="/assets/tanti model before.jpg" 
                               alt="הוספת פרזנטורית לחנות בגדים - דוגמנית מקורית" 
                               className="w-full h-40 object-contain bg-white"
                               onError={handleImageError}
@@ -359,7 +359,7 @@ const Services: React.FC = () => {
                         <div className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow relative bg-white border border-gray-100">
                           <div className="relative">
                             <img 
-                              src="/assets/tanti%20model%20after.jpg" 
+                              src="/assets/tanti model after.jpg" 
                               alt="הוספת פרזנטורית לחנות בגדים - אחרי עיבוד" 
                               className="w-full h-40 object-contain bg-white"
                               onError={handleImageError}
@@ -377,7 +377,7 @@ const Services: React.FC = () => {
                         
                         {getAllMediaFiles().filter(media => 
                           media.url.includes('video') || 
-                          media.url.includes('tanti') ||
+                          media.url.includes('model') ||
                           media.url.includes('garry') ||
                           media.url.includes('upscaled') ||
                           media.url.includes('WhatsApp')
@@ -435,7 +435,7 @@ const Services: React.FC = () => {
                         
                         {getAllMediaFiles().filter(media => 
                           media.url.includes('video') || 
-                          media.url.includes('tanti') ||
+                          media.url.includes('model') ||
                           media.url.includes('garry') ||
                           media.url.includes('upscaled') ||
                           media.url.includes('WhatsApp')
@@ -451,7 +451,7 @@ const Services: React.FC = () => {
                     <div className="mt-3 text-xs text-gray-500 text-center bg-white rounded px-2 py-1">
                       <p>סך הכל: {getAllMediaFiles().filter(media => 
                         media.url.includes('video') || 
-                        media.url.includes('tanti') ||
+                        media.url.includes('model') ||
                         media.url.includes('garry') ||
                         media.url.includes('upscaled') ||
                         media.url.includes('WhatsApp')
