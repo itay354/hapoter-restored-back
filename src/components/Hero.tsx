@@ -94,7 +94,8 @@ const Hero: React.FC = () => {
                   onCanPlay={() => console.log('Video can start playing')}
                 >
                   <source src="/videos/compressed-hapoter-video copy.mp4" type="video/mp4" />
-                  הדפדפן שלך לא תומך בפורמט הוידאו.
+                  <source src="/videos/doogmanit-video.mp4" type="video/mp4" />
+                  הדפדפן שלך לא תומך בפורמט הווידאו.
                 </video>
                 
                 {/* כפתור קול/השתקה */}
