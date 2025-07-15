@@ -40,14 +40,14 @@ const Services: React.FC = () => {
       {
         type: 'image',
         url: '/assets/tanti model before.jpg',
-        title: 'דוגמנית לפני עיבוד',
-        alt: 'דוגמנית לפני עיבוד - תמונה מקורית'
+        title: 'הוספת פרזנטורית לחנות בגדים',
+        alt: 'זוהי הדוגמנית המקורית של הלקוחה'
       },
       {
         type: 'image',
         url: '/assets/tanti model after.jpg',
-        title: 'דוגמנית אחרי עיבוד',
-        alt: 'דוגמנית אחרי עיבוד - תוצאה מקצועית'
+        title: 'דוגמנית אחרי עיבוד מקצועי',
+        alt: 'הדוגמנית לאחר עיבוד מקצועי'
       },
       // סרטוני וידאו
       {
@@ -141,8 +141,7 @@ const Services: React.FC = () => {
         bulletPoints: [
           "עיבוד תמונות ורטוש מקצועי",
           "הסרת רקע והחלפת רקע בדיוק גבוה",
-          "עריכת וידאו ואנימציות",
-          "אפקטים מיוחדים וסינכרון אודיו מקצועי"
+          "עריכת וידאו ואנימציות"
         ],
         images: [
           content.images.image1 || "/assets/model-before.jpg",
