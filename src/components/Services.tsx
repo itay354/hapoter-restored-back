@@ -372,25 +372,6 @@ const Services: React.FC = () => {
                                     🎬 וידאו
                                   </div>
                                 </div>
-                              ) : (
-                                <img 
-                                  src={media.url} 
-                                  alt={media.alt} 
-                                  className="w-full h-40 object-contain bg-white"
-                                  onError={handleImageError}
-                                />
-                              )}
-                              <div className="p-2">
-                                <p className="text-xs font-medium text-gray-700 truncate" title={media.title}>
-                                  {media.title}
-                                </p>
-                                <p className="text-xs text-gray-500 mt-0.5">
-                                  {media.type === 'video' ? 'וידאו' : 'תמונה'}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
                         
                         {getAllMediaFiles().filter(media => 
                           media.url.includes('video') || 
