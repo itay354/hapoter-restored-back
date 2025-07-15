@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
         fallbackImg.className = 'video-fallback w-full h-auto';
         fallbackImg.src = content.images.hero || "/assets/FB_IMG_1544304445964.jpg";
         fallbackImg.alt = "המנהל שהופך ממבולבל למבסוט";
-        fallbackImg.style.filter = 'brightness(1.05) contrast(1.02)';
+        fallbackImg.loading = 'lazy';
         parent.appendChild(fallbackImg);
       }
     }
@@ -89,10 +89,6 @@ const Hero: React.FC = () => {
                   loading="lazy"
                   poster="/assets/FB_IMG_1544304445964.jpg"
                   className="w-full h-full object-cover rounded-xl"
-                  style={{
-                    filter: 'brightness(1.05) contrast(1.02)',
-                    backgroundColor: 'white'
-                  }}
                   onError={handleVideoError}
                   onLoadStart={() => console.log('Video loading started')}
                   onCanPlay={() => console.log('Video can start playing')}

@@ -104,10 +104,8 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
               src={example.before} 
               alt={`${example.title} - לפני`} 
               className="max-w-full max-h-full object-contain bg-white select-none pointer-events-none"
-              style={{
-                filter: 'brightness(1.05) contrast(1.02)',
-                backgroundColor: 'white'
-              }}
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.onerror = null;
@@ -127,10 +125,8 @@ const ExampleCard: React.FC<ExampleCardProps> = React.memo(({
               src={example.after} 
               alt={`${example.title} - אחרי`} 
               className="max-w-full max-h-full object-contain bg-white select-none pointer-events-none"
-              style={{
-                filter: 'brightness(1.05) contrast(1.02)',
-                backgroundColor: 'white'
-              }}
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.onerror = null;

@@ -30,9 +30,21 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     target: 'esnext',
+    assetsInlineLimit: 4096,
     rollupOptions: {
       output: {
         manualChunks: undefined,
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.');
+          const extType = info[info.length - 1];
+          if (/\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i.test(assetInfo.name)) {
+            return `images/[name]-[hash][extname]`;
+          }
+          if (/\.(mp4|webm|ogg|mp3|wav|flac|aac)$/i.test(assetInfo.name)) {
+            return `media/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
+        },
       },
     },
   },

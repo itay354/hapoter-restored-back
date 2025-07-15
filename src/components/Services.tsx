@@ -371,6 +371,7 @@ const Services: React.FC = () => {
                                     controls={false}
                                     muted
                                     preload="metadata"
+                                    loading="lazy"
                                     poster={media.url.replace('.mp4', '.jpg')}
                                     onError={(e) => {
                                       const target = e.target as HTMLVideoElement;
@@ -395,6 +396,8 @@ const Services: React.FC = () => {
                                   src={media.url} 
                                   alt={media.alt} 
                                   className="w-full h-40 object-cover"
+                                  loading="lazy"
+                                  decoding="async"
                                   onError={handleImageError}
                                 />
                               )}

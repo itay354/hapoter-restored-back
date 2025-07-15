@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Performance optimizations */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+video {
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* Lazy loading improvements */
+img[loading="lazy"],
+video[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded,
+video[loading="lazy"].loaded {
+  opacity: 1;
+}
+
 @layer utilities {
   .animate-float {
     animation: float 6s ease-in-out infinite;
@@ -14,6 +37,14 @@
   }
   .scrollbar-hide::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
+  }
+  
+  /* Image optimization */
+  .optimized-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 }
 
