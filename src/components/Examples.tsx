@@ -31,12 +31,12 @@ const Examples: React.FC = () => {
         posterImage: "/assets/logo-with-mockup-garry.jpg"
       },
       {
-        before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg", 
+        before: "/assets/tanti%20model%20before.jpg",
+        after: "/assets/tanti%20model%20after.jpg", 
         title: "עיבוד תמונות לוידאו",
         type: "video",
         videoUrl: "/assets/services/images-video/videos/regular model turns to video.mp4",
-        posterImage: "/assets/tanti model after.jpg"
+        posterImage: "/assets/tanti%20model%20after.jpg"
       },
       {
         before: "/assets/upscaled_with_blurred_background_3000x3000.jpg",

@@ -339,7 +339,7 @@ const Services: React.FC = () => {
                         <div className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow relative bg-white border border-gray-100">
                           <div className="relative">
                             <img 
-                              src="/assets/tanti model before.jpg" 
+                              src="/assets/tanti%20model%20before.jpg" 
                               alt="הוספת פרזנטורית לחנות בגדים - דוגמנית מקורית" 
                               className="w-full h-40 object-contain bg-white"
                               onError={handleImageError}
@@ -350,6 +350,26 @@ const Services: React.FC = () => {
                               </p>
                               <p className="text-xs text-gray-500 mt-0.5">
                                 זוהי הדוגמנית המקורית של הלקוחה
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* הוספת תמונה אחרי התמונה הסגולה */}
+                        <div className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow relative bg-white border border-gray-100">
+                          <div className="relative">
+                            <img 
+                              src="/assets/tanti%20model%20after.jpg" 
+                              alt="הוספת פרזנטורית לחנות בגדים - אחרי עיבוד" 
+                              className="w-full h-40 object-contain bg-white"
+                              onError={handleImageError}
+                            />
+                            <div className="p-2">
+                              <p className="text-xs font-medium text-gray-700 truncate" title="הוספת פרזנטורית לחנות בגדים - אחרי עיבוד">
+                                הוספת פרזנטורית לחנות בגדים - אחרי עיבוד
+                              </p>
+                              <p className="text-xs text-gray-500 mt-0.5">
+                                תוצאה סופית מקצועית
                               </p>
                             </div>
                           </div>
