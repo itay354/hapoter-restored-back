@@ -11,31 +11,41 @@ const Examples: React.FC = () => {
   const EXAMPLES_DATA = useMemo(() => ({
     images: [
       {
-        before: content.images.image1 || "/assets/tanti model before.jpg",
-        after: content.images.image2 || "/assets/tanti model after.jpg",
+        before: "/assets/tanti model before.jpg",
+        after: "/assets/tanti model after.jpg",
         title: 'אותם בגדים - שינוי דוגמנית לפי דרישה'
       },
       {
         before: "/assets/Slide3.PNG",
-        after: "/assets/image copy copy.png", 
+        after: "/assets/image copy copy.png",
         title: "מצגת עסקית - שיפור מקצועי"
+      },
+      {
+        before: "/assets/player.jpg",
+        after: "/assets/generated_image.png",
+        title: "יצירת מוקאפים"
+      },
+      {
+        before: "/assets/be there - before.png",
+        after: "/assets/be there after.png",
+        title: "מערכת השמת כ\"א - מסקיצה למוקאפ"
       }
     ],
     videos: [
       {
-        before: "/assets/logo-transparent-garry.svg",
-        after: "/assets/logo-with-mockup-garry.jpg",
+        before: "/assets/tanti model before.jpg",
+        after: "/assets/tanti model after.jpg",
         title: "פרסומת גארי גלינר - מלוגו לסרטון",
         type: "video",
-        videoUrl: "/videos/garry first video ad.mp4",
-        posterImage: "/assets/logo-with-mockup-garry.jpg"
+        videoUrl: "/assets/services/images-video/videos/garry first video ad.mp4",
+        posterImage: "/assets/tanti model after.jpg"
       },
       {
         before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg", 
+        after: "/assets/tanti model after.jpg",
         title: "עיבוד תמונות לוידאו",
         type: "video",
-        videoUrl: "/videos/regular model turns to video.mp4",
+        videoUrl: "/assets/services/images-video/videos/regular model turns to video.mp4",
         posterImage: "/assets/tanti model after.jpg"
       },
       {
@@ -43,14 +53,22 @@ const Examples: React.FC = () => {
         after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
         title: "הנפשת דמויות",
         type: "video",
-        videoUrl: "/videos/black model turned to video.mp4",
+        videoUrl: "/assets/services/images-video/videos/black model turned to video.mp4",
         posterImage: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg"
+      },
+      {
+        before: "/assets/logo-transparent-garry.svg",
+        after: "/assets/logo-with-mockup-garry.jpg",
+        title: "אנימציית לוגו",
+        type: "video",
+        videoUrl: "/videos/doogmanit-video.mp4",
+        posterImage: "/assets/logo-with-mockup-garry.jpg"
       }
     ],
     mockups: [
       {
-        before: content.images.before1 || "/assets/player.jpg",
-        after: content.images.after1 || "/assets/generated_image.png",
+        before: "/assets/player.jpg",
+        after: "/assets/generated_image.png",
         title: "יצירת מוקאפים"
       },
       {
@@ -59,9 +77,19 @@ const Examples: React.FC = () => {
         title: "עיצוב לוגו והטמעתו כמוקאפ על משקולת"
       },
       {
-        before: content.images.before3 || "/assets/be there - before.png",
-        after: content.images.after3 || "/assets/be there after.png",
+        before: "/assets/be there - before.png",
+        after: "/assets/be there after.png",
         title: "מערכת השמת כ\"א - מסקיצה למוקאפ"
+      },
+      {
+        before: "/assets/tanti model before.jpg",
+        after: "/assets/tanti model after.jpg",
+        title: "שינוי דוגמנית - הוספה למוקאפ"
+      },
+      {
+        before: "/assets/Slide3.PNG",
+        after: "/assets/image copy copy.png",
+        title: "מצגת עסקית - מוקאפ מקצועי"
       }
     ],
     logos: []
