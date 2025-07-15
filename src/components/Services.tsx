@@ -484,6 +484,25 @@ const Services: React.FC = () => {
                         </div>
                       ))}
                       
+                      {/* דוגמנית כהת העור - אחרי עיבוד */}
+                      <div className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow relative bg-white border border-gray-100">
+                        <div className="relative">
+                          <img 
+                            src="/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg" 
+                            alt="דוגמנית כהת העור - אחרי עיבוד" 
+                            className="w-full h-40 object-contain bg-white"
+                            onError={handleImageError}
+                          />
+                          <div className="p-2">
+                            <p className="text-xs font-medium text-gray-700 truncate" title="דוגמנית כהת העור - אחרי עיבוד">
+                              דוגמנית כהת העור - אחרי עיבוד
+                            </p>
+                            <p className="text-xs text-gray-500 mt-0.5">
+                              תוצאה סופית מקצועית
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                       {services[selectedService].detailedContent.images.length < 3 && (
                         <div className="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 h-40 flex items-center justify-center">
                           <div className="text-center text-gray-400">
