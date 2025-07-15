@@ -16,48 +16,67 @@ const Services: React.FC = () => {
       alt: string;
     }> = [];
     
-    // תמונות מה-ContentManager
-    Object.entries(content.images || {}).forEach(([key, url]) => {
-      if (url && url.trim()) {
-        mediaFiles.push({
-          type: url.includes('.mp4') || url.includes('video') ? 'video' : 'image',
-          url: url,
-          title: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
-          alt: `${key} - תמונה מהמערכת`
-        });
-      }
-    });
-    
-    const additionalVideos = [
+    // תמונות וסרטונים רלוונטיים לעיבוד תמונות ווידאו
+    const relevantMedia = [
+      // תמונות מוקאפים ועיבוד
+      {
+        type: 'image',
+        url: '/assets/logo-with-mockup-garry.jpg',
+        title: 'לוגו גארי על משקולת',
+        alt: 'לוגו גארי גלינר על משקולת - דוגמה למוקאפ'
+      },
+      {
+        type: 'image',
+        url: '/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg',
+        title: 'תמונה מקצועית מעובדת',
+        alt: 'תמונה מעובדת באיכות גבוהה עם רקע מטושטש'
+      },
+      {
+        type: 'image',
+        url: '/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg',
+        title: 'תמונת WhatsApp מעובדת',
+        alt: 'תמונת WhatsApp לאחר עיבוד מקצועי'
+      },
+      {
+        type: 'image',
+        url: '/assets/tanti model before.jpg',
+        title: 'דוגמנית לפני עיבוד',
+        alt: 'דוגמנית לפני עיבוד - תמונה מקורית'
+      },
+      {
+        type: 'image',
+        url: '/assets/tanti model after.jpg',
+        title: 'דוגמנית אחרי עיבוד',
+        alt: 'דוגמנית אחרי עיבוד - תוצאה מקצועית'
+      },
+      // סרטוני וידאו
       {
         type: 'video',
-        url: '/assets/services/images-video/videos/garry first video ad.mp4',
+        url: '/videos/garry first video ad.mp4',
         title: 'פרסומת גארי גלינר',
         alt: 'סרטון פרסומת גארי גלינר'
       },
       {
         type: 'video',
-        url: '/assets/services/images-video/videos/regular model turns to video.mp4',
+        url: '/videos/regular model turns to video.mp4',
         title: 'עיבוד תמונות לוידאו',
         alt: 'סרטון עיבוד תמונות לוידאו'
       },
       {
         type: 'video',
-        url: '/assets/services/images-video/videos/black model turned to video.mp4',
+        url: '/videos/black model turned to video.mp4',
         title: 'הנפשת דמויות',
         alt: 'סרטון הנפשת דמויות'
       },
       {
-        type: 'image',
-        url: '/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg',
-        title: 'תמונה מעובדת באיכות גבוהה',
-        alt: 'תמונה מעובדת עם רקע מטושטש'
+        type: 'video',
+        url: '/videos/doogmanit-video.mp4',
+        title: 'הנפשת דוגמנית',
+        alt: 'סרטון הנפשת דוגמנית'
       }
     ];
     
-    mediaFiles.push(...additionalVideos);
-    
-    return mediaFiles;
+    return relevantMedia;
   };
 
   useEffect(() => {
