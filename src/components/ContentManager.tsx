@@ -27,8 +27,8 @@ const defaultContent: ContentData = {
   images: {
     hero: '/assets/FB_IMG_1544304445964.jpg',
     about: '/assets/itay-koronio.jpg',
-    image1: '/assets/tanti model before.jpg',
-    image2: '/assets/tanti model after.jpg',
+    image1: '/assets/tanti%20model%20before.jpg',
+    image2: '/assets/tanti%20model%20after.jpg',
     before1: '/assets/player.jpg',
     after1: '/assets/generated_image.png',
     before2: '/assets/Slide3.PNG',

@@ -52,19 +52,19 @@ const Services: React.FC = () => {
       // סרטוני וידאו
       {
         type: 'video',
-        url: '/videos/garry first video ad.mp4',
+        url: '/videos/garry%20first%20video%20ad.mp4',
         title: 'פרסומת גארי גלינר',
         alt: 'סרטון פרסומת גארי גלינר'
       },
       {
         type: 'video',
-        url: '/videos/regular model turns to video.mp4',
+        url: '/videos/regular%20model%20turns%20to%20video.mp4',
         title: 'עיבוד תמונות לוידאו',
         alt: 'סרטון עיבוד תמונות לוידאו'
       },
       {
         type: 'video',
-        url: '/videos/black model turned to video.mp4',
+        url: '/videos/black%20model%20turned%20to%20video.mp4',
         title: 'הנפשת דמויות',
         alt: 'סרטון הנפשת דמויות'
       },
