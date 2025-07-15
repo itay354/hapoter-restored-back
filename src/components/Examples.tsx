@@ -11,8 +11,8 @@ const Examples: React.FC = () => {
   const EXAMPLES_DATA = useMemo(() => ({
     images: [
       {
-        before: content.images.image1 || "/assets/tanti model before.jpg",
-        after: content.images.image2 || "/assets/tanti model after.jpg",
+        before: content.images.image1 || "/assets/tanti%20model%20before.jpg",
+        after: content.images.image2 || "/assets/tanti%20model%20after.jpg",
         title: 'אותם בגדים - שינוי דוגמנית לפי דרישה'
       },
       {
@@ -27,7 +27,7 @@ const Examples: React.FC = () => {
         after: "/assets/logo-with-mockup-garry.jpg",
         title: "פרסומת גארי גלינר - מלוגו לסרטון",
         type: "video",
-        videoUrl: "/assets/services/images-video/videos/garry first video ad.mp4",
+        videoUrl: "/videos/garry%20first%20video%20ad.mp4",
         posterImage: "/assets/logo-with-mockup-garry.jpg"
       },
       {
@@ -35,7 +35,7 @@ const Examples: React.FC = () => {
         after: "/assets/tanti%20model%20after.jpg", 
         title: "עיבוד תמונות לוידאו",
         type: "video",
-        videoUrl: "/assets/services/images-video/videos/regular model turns to video.mp4",
+        videoUrl: "/videos/regular%20model%20turns%20to%20video.mp4",
         posterImage: "/assets/tanti%20model%20after.jpg"
       },
       {
@@ -43,7 +43,7 @@ const Examples: React.FC = () => {
         after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
         title: "הנפשת דמויות",
         type: "video",
-        videoUrl: "/assets/services/images-video/videos/black model turned to video.mp4",
+        videoUrl: "/videos/black%20model%20turned%20to%20video.mp4",
         posterImage: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg"
       }
     ],
