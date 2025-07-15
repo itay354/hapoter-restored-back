@@ -317,6 +317,26 @@ const Services: React.FC = () => {
                           scrollbarColor: '#6366f1 #e2e8f0'
                         }}
                       >
+                        {/* דוגמה חדשה - הוספת פרזנטורית לחנות בגדים */}
+                        <div className="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow relative bg-white border border-gray-100">
+                          <div className="relative">
+                            <img 
+                              src="/assets/tanti model before.jpg" 
+                              alt="הוספת פרזנטורית לחנות בגדים - דוגמנית מקורית" 
+                              className="w-full h-40 object-contain bg-white"
+                              onError={handleImageError}
+                            />
+                            <div className="p-2">
+                              <p className="text-xs font-medium text-gray-700 truncate" title="הוספת פרזנטורית לחנות בגדים">
+                                הוספת פרזנטורית לחנות בגדים
+                              </p>
+                              <p className="text-xs text-gray-500 mt-0.5">
+                                זוהי הדוגמנית המקורית של הלקוחה
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        
                         {getAllMediaFiles().filter(media => 
                           media.url.includes('video') || 
                           media.url.includes('tanti') ||
