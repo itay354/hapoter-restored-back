@@ -1,14 +1,9 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { useContent } from './ContentManager';
-import ExampleCard from './ExampleCard';
+import React, { useState } from 'react';
 
 const Examples: React.FC = () => {
-  const { content } = useContent();
   const [activeTab, setActiveTab] = useState('images');
-  const [dividerPositions, setDividerPositions] = useState<{ [key: string]: number }>({});
-  
-  // קבצים בסיסיים שבוודאות קיימים (ללא רווחים)
-  const EXAMPLES_DATA = useMemo(() => ({
+
+  const examples = {
     images: [
       {
         before: "/assets/player.jpg",
@@ -33,42 +28,27 @@ const Examples: React.FC = () => {
     ],
     videos: [
       {
-        before: "/assets/logo-transparent-garry.svg",
-        after: "/assets/logo-with-mockup-garry.jpg",
-        title: "סרטון דוגמנית",
-        type: "video",
         videoUrl: "/videos/doogmanit-video.mp4",
-        posterImage: "/assets/FB_IMG_1544304445964.jpg"
+        title: "דוגמאות עיבוד וידאו",
+        poster: "/assets/FB_IMG_1544304445964.jpg"
       }
     ],
-    mockups: [
+    logos: [
       {
-        before: "/assets/player.jpg",
-        after: "/assets/generated_image.png",
-        title: "יצירת מוקאפים"
+        src: "/assets/logo-transparent-garry.svg",
+        title: "לוגו גארי גלינר"
       },
       {
-        before: "/assets/logo-transparent-garry.svg",
-        after: "/assets/logo-with-mockup-garry.jpg",
-        title: "עיצוב לוגו והטמעתו כמוקאפ"
+        src: "/assets/logo-with-mockup-garry.jpg",
+        title: "מוקאפ לוגו"
       }
-    ],
-    logos: []
-  }), []);
-  
-  // Handle divider position change
-  const handleDividerChange = useCallback((category: string, index: number, position: number): void => {
-    const key = `${category}-${index}`;
-    setDividerPositions(prev => ({
-      ...prev,
-      [key]: position
-    }));
-  }, []);
+    ]
+  };
 
-  // Memoize current examples
-  const currentExamples = useMemo(() => {
-    return EXAMPLES_DATA[activeTab as keyof typeof EXAMPLES_DATA] || [];
-  }, [activeTab, EXAMPLES_DATA]);
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = "/assets/generated_image.png";
+  };
 
   return (
     <section id="examples" className="py-16 md:py-24 bg-peach-100 relative overflow-hidden">
@@ -83,10 +63,11 @@ const Examples: React.FC = () => {
           </p>
         </div>
 
+        {/* Tabs */}
         <div className="flex justify-center mb-10">
-          <div className="flex space-x-2 space-x-reverse bg-gray-100 p-1 rounded-lg relative max-w-full overflow-x-auto scrollbar-hide">
+          <div className="flex space-x-2 space-x-reverse bg-gray-100 p-1 rounded-lg">
             <button 
-              className={`relative z-10 px-6 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
+              className={`px-6 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === 'images' 
                   ? 'bg-white text-royal-600 shadow-sm' 
                   : 'text-gray-600 hover:text-royal-600'
@@ -96,7 +77,7 @@ const Examples: React.FC = () => {
               תמונות
             </button>
             <button 
-              className={`relative z-10 px-6 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
+              className={`px-6 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === 'videos' 
                   ? 'bg-white text-royal-600 shadow-sm' 
                   : 'text-gray-600 hover:text-royal-600'
@@ -106,167 +87,110 @@ const Examples: React.FC = () => {
               וידאו
             </button>
             <button 
-              className={`relative z-10 px-6 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
-                activeTab === 'mockups' 
-                  ? 'bg-white text-royal-600 shadow-sm' 
-                  : 'text-gray-600 hover:text-royal-600'
-              }`}
-              onClick={() => setActiveTab('mockups')}
-            >
-              <span className="text-sm md:text-base">יצירת מוקאפים</span>
-            </button>
-            <button 
-              className={`relative z-10 px-6 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
+              className={`px-6 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === 'logos' 
                   ? 'bg-white text-royal-600 shadow-sm' 
                   : 'text-gray-600 hover:text-royal-600'
               }`}
               onClick={() => setActiveTab('logos')}
             >
-              <span className="text-sm md:text-base">לוגואים</span>
+              לוגואים
             </button>
           </div>
         </div>
 
-        {/* תוכן הטאבים */}
-        {activeTab === 'logos' ? (
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-xl shadow-xl p-8 relative">
-              <div className="relative z-10">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    לוגואים שעיצבנו
-                  </h3>
-                  <p className="text-gray-600">
-                    דוגמאות מעבודות הלוגו שלנו עבור לקוחות שונים
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
-                      <img
-                        src="/assets/logo-transparent-garry.svg"
-                        alt="גארי גלינר - לוגו"
-                        className="max-w-16 max-h-16 object-contain"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = "/assets/generated_image.png";
-                        }}
-                      />
-                    </div>
-                    <h4 className="font-semibold text-sm text-center">גארי גלינר</h4>
-                    <p className="text-xs text-gray-500 text-center">מאמן כושר</p>
-                  </div>
-                  
-                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
-                      <img
-                        src="/assets/logo-with-mockup-garry.jpg"
-                        alt="מוקאפ גארי"
-                        className="max-w-16 max-h-16 object-contain"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = "/assets/generated_image.png";
-                        }}
-                      />
-                    </div>
-                    <h4 className="font-semibold text-sm text-center">מוקאפ גארי</h4>
-                    <p className="text-xs text-gray-500 text-center">עיצוב מקצועי</p>
-                  </div>
-                  
-                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
-                      <div className="w-16 h-16 bg-gradient-to-br from-royal-500 to-coral-500 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-xs">פרויקט</span>
+        {/* Content */}
+        <div className="max-w-6xl mx-auto">
+          {activeTab === 'images' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {examples.images.map((example, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">{example.title}</h3>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="text-center">
+                        <p className="text-sm text-gray-600 mb-2">לפני</p>
+                        <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                          <img 
+                            src={example.before} 
+                            alt={`${example.title} - לפני`}
+                            className="w-full h-full object-cover"
+                            onError={handleImageError}
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <h4 className="font-semibold text-sm text-center">פרויקט נוסף</h4>
-                    <p className="text-xs text-gray-500 text-center">בקרוב...</p>
-                  </div>
-                  
-                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
-                      <div className="w-16 h-16 bg-gradient-to-br from-royal-500 to-coral-500 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-xs">עוד</span>
-                      </div>
-                    </div>
-                    <h4 className="font-semibold text-sm text-center">פרויקטים נוספים</h4>
-                    <p className="text-xs text-gray-500 text-center">בקרוב...</p>
-                  </div>
-                </div>
-                
-                <div className="text-center mt-8">
-                  <a 
-                    href="#contact" 
-                    className="inline-block bg-royal-600 hover:bg-royal-700 text-white font-medium px-6 py-3 rounded-lg transition-colors relative"
-                  >
-                    <span className="relative">רוצים לוגו דומה? צרו קשר</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {currentExamples.map((example: any, index: number) => {
-              const exampleKey = `${activeTab}-${index}`;
-              const dividerPosition = dividerPositions[exampleKey] || 50;
-              
-              // וידאו מיוחד עבור דוגמאות וידאו
-              if (activeTab === 'videos' && example.type === 'video') {
-                return (
-                  <div 
-                    key={exampleKey}
-                    className="bg-white rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up relative"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <div className="p-6 relative">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-6">{example.title}</h3>
                       
-                      <div className="relative w-full aspect-video overflow-hidden rounded-lg bg-gray-100">
-                        <video 
-                          controls
-                          preload="metadata"
-                          loading="lazy"
-                          poster={example.posterImage}
-                          className="w-full h-full object-contain"
-                          onError={(e) => {
-                            const target = e.target as HTMLVideoElement;
-                            target.style.display = 'none';
-                            console.error('Video failed to load:', example.videoUrl);
-                          }}
-                        >
-                          <source src={example.videoUrl} type="video/mp4" />
-                          הדפדפן שלך לא תומך בפורמט הוידאו.
-                        </video>
+                      <div className="text-center">
+                        <p className="text-sm text-gray-600 mb-2">אחרי</p>
+                        <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                          <img 
+                            src={example.after} 
+                            alt={`${example.title} - אחרי`}
+                            className="w-full h-full object-cover"
+                            onError={handleImageError}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                );
-              }
-              
-              return (
-                <ExampleCard 
-                  key={exampleKey}
-                  example={example}
-                  activeTab={activeTab}
-                  index={index}
-                  dividerPosition={dividerPosition}
-                  onDividerPositionChange={(position) => handleDividerChange(activeTab, index, position)}
-                />
-              );
-            })}
-          </div>
-        )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeTab === 'videos' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {examples.videos.map((video, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">{video.title}</h3>
+                    
+                    <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden">
+                      <video 
+                        controls
+                        className="w-full h-full"
+                        poster={video.poster}
+                      >
+                        <source src={video.videoUrl} type="video/mp4" />
+                        הדפדפן שלך לא תומך בוידאו
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeTab === 'logos' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {examples.logos.map((logo, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">{logo.title}</h3>
+                    
+                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
+                      <img 
+                        src={logo.src} 
+                        alt={logo.title}
+                        className="max-w-full max-h-full object-contain"
+                        onError={handleImageError}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         <div className="text-center mt-12">
           <p className="text-lg text-gray-600 mb-6">צריכים משהו דומה? אנחנו כאן כדי לעזור!</p>
           <a 
             href="#contact" 
-            className="inline-block bg-coral-500 hover:bg-coral-600 text-white font-medium px-8 py-3 rounded-lg transition-colors relative"
+            className="inline-block bg-coral-500 hover:bg-coral-600 text-white font-medium px-8 py-3 rounded-lg transition-colors"
           >
-            <span className="relative">דברו איתנו עכשיו</span>
+            דברו איתנו עכשיו
           </a>
         </div>
       </div>
