@@ -40,22 +40,22 @@ const Examples: React.FC = () => {
       {
         videoUrl: "/assets/services/images-video/videos/garry%20first%20video%20ad.mp4",
         title: "פרסומת גארי גלינר",
-        poster: "/assets/logo-with-mockup-garry.jpg"
+        poster: "/assets/logo-transparent-garry.svg"
       },
       {
         videoUrl: "/assets/services/images-video/videos/black%20model%20turned%20to%20video.mp4",
         title: "הנפשת דוגמנית כהת עור",
-        poster: "/assets/services/images-video/examples/WhatsApp%20Image%202025-01-11%20at%2022.50.40_3e0b1e38.jpg"
+        poster: "/assets/tanti%20model%20after.jpg"
       },
       {
         videoUrl: "/videos/doogmanit-video.mp4",
         title: "הנפשת דוגמנית",
-        poster: "/assets/tanti%20model%20after.jpg"
+        poster: "/assets/services/images-video/examples/WhatsApp%20Image%202025-01-11%20at%2022.50.40_3e0b1e38.jpg"
       },
       {
         videoUrl: "/videos/compressed-hapoter-video%20copy.mp4",
         title: "הפותר בפעולה",
-        poster: "/assets/itay-koronio.jpg"
+        poster: "/assets/FB_IMG_1544304445964.jpg"
       }
     ],
     logos: [
