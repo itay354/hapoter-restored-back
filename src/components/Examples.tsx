@@ -167,7 +167,7 @@ const Examples: React.FC = () => {
                           <img 
                             src={example.before} 
                             alt={`${example.title} - לפני`}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                             onError={handleImageError}
                           />
                         </div>
@@ -179,7 +179,7 @@ const Examples: React.FC = () => {
                           <img 
                             src={example.after} 
                             alt={`${example.title} - אחרי`}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                             onError={handleImageError}
                           />
                         </div>
@@ -227,7 +227,7 @@ const Examples: React.FC = () => {
                       <img 
                         src={logo.src} 
                         alt={logo.title}
-                        className="max-w-full max-h-full object-contain"
+                        className="max-w-full max-h-full object-contain p-2"
                         onError={handleImageError}
                       />
                     </div>
