@@ -16,9 +16,9 @@ const Examples: React.FC = () => {
         title: 'אותם בגדים - שינוי דוגמנית לפי דרישה'
       },
       {
-        before: "/assets/slide2-before.png/Slide2.PNG",
-        after: "/assets/slide2-after.png/Slide2.PNG",
-        title: "מצגת עסקית - שיפור מקצועי"
+        before: "/assets/be there - before.png",
+        after: "/assets/be there after.png",
+        title: "מערכת השמת כ\"א - מסקיצה למוקאפ"
       },
       {
         before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
@@ -26,19 +26,19 @@ const Examples: React.FC = () => {
         title: "יצירת מוקאפים"
       },
       {
-        before: "/assets/be there - before.png",
-        after: "/assets/be there after.png",
-        title: "מערכת השמת כ\"א - מסקיצה למוקאפ"
+        before: "/assets/Slide3.PNG",
+        after: "/assets/image copy copy.png",
+        title: "מצגת עסקית - שיפור מקצועי"
       }
     ],
     videos: [
       {
-        before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg",
+        before: "/assets/logo-transparent-garry.svg",
+        after: "/assets/logo-with-mockup-garry.jpg",
         title: "פרסומת גארי גלינר - מלוגו לסרטון",
         type: "video",
         videoUrl: "/assets/services/images-video/videos/garry first video ad.mp4",
-        posterImage: "/assets/tanti model after.jpg"
+        posterImage: "/assets/logo-with-mockup-garry.jpg"
       },
       {
         before: "/assets/tanti model before.jpg",
@@ -57,12 +57,12 @@ const Examples: React.FC = () => {
         posterImage: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg"
       },
       {
-        before: "/assets/logo-transparent-garry.svg",
-        after: "/assets/logo-with-mockup-garry.jpg",
-        title: "אנימציית לוגו",
+        before: "/assets/FB_IMG_1544304445964.jpg",
+        after: "/assets/new hapoter logo transparent.png",
+        title: "אנימציית הפותר",
         type: "video",
         videoUrl: "/videos/doogmanit-video.mp4",
-        posterImage: "/assets/logo-with-mockup-garry.jpg"
+        posterImage: "/assets/new hapoter logo transparent.png"
       }
     ],
     mockups: [
@@ -87,8 +87,8 @@ const Examples: React.FC = () => {
         title: "שינוי דוגמנית - הוספה למוקאפ"
       },
       {
-        before: "/assets/slide2-before.png/Slide2.PNG",
-        after: "/assets/slide2-after.png/Slide2.PNG",
+        before: "/assets/Slide3.PNG",
+        after: "/assets/image copy copy.png",
         title: "מצגת עסקית - מוקאפ מקצועי"
       }
     ],
@@ -222,9 +222,15 @@ const Examples: React.FC = () => {
                   
                   <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
-                      <div className="w-16 h-16 bg-gradient-to-br from-royal-500 to-coral-500 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-xs">הפותר</span>
-                      </div>
+                      <img
+                        src="/assets/new hapoter logo transparent.png"
+                        alt="הפותר - לוגו"
+                        className="max-w-16 max-h-16 object-contain"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                        }}
+                      />
                     </div>
                     <h4 className="font-semibold text-sm text-center">הפותר</h4>
                     <p className="text-xs text-gray-500 text-center">שירותי עיצוב</p>
@@ -276,10 +282,6 @@ const Examples: React.FC = () => {
                           loading="lazy"
                           poster={example.posterImage || example.before}
                           className="w-full h-full object-contain"
-                          onLoadedMetadata={(e) => {
-                            const video = e.target as HTMLVideoElement;
-                            video.currentTime = 3;
-                          }}
                           onError={(e) => {
                             const target = e.target as HTMLVideoElement;
                             target.style.display = 'none';
