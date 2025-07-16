@@ -7,93 +7,72 @@ const Examples: React.FC = () => {
   const [activeTab, setActiveTab] = useState('images');
   const [dividerPositions, setDividerPositions] = useState<{ [key: string]: number }>({});
   
-  // יצירת EXAMPLES_DATA דינמי שמשתמש בתמונות מה-ContentManager
+  // יצירת EXAMPLES_DATA עם קבצים שבוודאות קיימים
   const EXAMPLES_DATA = useMemo(() => ({
     images: [
       {
-        before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg",
-        title: 'אותם בגדים - שינוי דוגמנית לפי דרישה'
-      },
-      {
-        before: "/assets/be there - before.png",
-        after: "/assets/be there after.png",
-        title: "מערכת השמת כ\"א - מסקיצה למוקאפ"
-      },
-      {
-        before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
-        after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
-        title: "יצירת מוקאפים"
+        before: "/assets/player.jpg",
+        after: "/assets/generated_image.png",
+        title: 'עיבוד תמונה מקצועי'
       },
       {
         before: "/assets/Slide3.PNG",
-        after: "/assets/image copy copy.png",
-        title: "מצגת עסקית - שיפור מקצועי"
+        after: "/assets/generated_image.png",
+        title: "שיפור מצגת עסקית"
+      },
+      {
+        before: "/assets/FB_IMG_1544304445964.jpg",
+        after: "/assets/generated_image.png",
+        title: "עיבוד תמונה אישית"
+      },
+      {
+        before: "/assets/itay-koronio.jpg",
+        after: "/assets/generated_image.png",
+        title: "עיבוד תמונה מקצועית"
       }
     ],
     videos: [
       {
         before: "/assets/logo-transparent-garry.svg",
         after: "/assets/logo-with-mockup-garry.jpg",
-        title: "פרסומת גארי גלינר - מלוגו לסרטון",
+        title: "פרסומת גארי גלינר",
         type: "video",
-        videoUrl: "/assets/services/images-video/videos/garry first video ad.mp4",
+        videoUrl: "/videos/doogmanit-video.mp4",
         posterImage: "/assets/logo-with-mockup-garry.jpg"
       },
       {
-        before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg",
-        title: "עיבוד תמונות לוידאו",
-        type: "video",
-        videoUrl: "/assets/services/images-video/videos/regular model turns to video.mp4",
-        posterImage: "/assets/tanti model after.jpg"
-      },
-      {
-        before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
-        after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
-        title: "הנפשת דמויות",
-        type: "video",
-        videoUrl: "/assets/services/images-video/videos/black model turned to video.mp4",
-        posterImage: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg"
-      },
-      {
-        before: "/assets/FB_IMG_1544304445964.jpg",
-        after: "/assets/new hapoter logo transparent.png",
-        title: "אנימציית הפותר",
-        type: "video",
-        videoUrl: "/videos/doogmanit-video.mp4",
-        posterImage: "/assets/new hapoter logo transparent.png"
+        before: "/assets/player.jpg",
+        after: "/assets/generated_image.png",
+        title: "סרטון עיבוד תמונות",
+        type: "video", 
+        videoUrl: "/videos/compressed-hapoter-video copy.mp4",
+        posterImage: "/assets/generated_image.png"
       }
     ],
     mockups: [
       {
-        before: "/assets/services/images-video/examples/upscaled_with_blurred_background_3000x3000.jpg",
-        after: "/assets/services/images-video/examples/WhatsApp Image 2025-01-11 at 22.50.40_3e0b1e38.jpg",
+        before: "/assets/player.jpg",
+        after: "/assets/generated_image.png",
         title: "יצירת מוקאפים"
       },
       {
         before: "/assets/logo-transparent-garry.svg",
         after: "/assets/logo-with-mockup-garry.jpg",
-        title: "עיצוב לוגו והטמעתו כמוקאפ על משקולת"
-      },
-      {
-        before: "/assets/be there - before.png",
-        after: "/assets/be there after.png",
-        title: "מערכת השמת כ\"א - מסקיצה למוקאפ"
-      },
-      {
-        before: "/assets/tanti model before.jpg",
-        after: "/assets/tanti model after.jpg",
-        title: "שינוי דוגמנית - הוספה למוקאפ"
+        title: "עיצוב לוגו והטמעתו כמוקאפ"
       },
       {
         before: "/assets/Slide3.PNG",
-        after: "/assets/image copy copy.png",
+        after: "/assets/generated_image.png",
         title: "מצגת עסקית - מוקאפ מקצועי"
+      },
+      {
+        before: "/assets/FB_IMG_1544304445964.jpg",
+        after: "/assets/generated_image.png",
+        title: "עיבוד תמונה למוקאפ"
       }
     ],
     logos: []
-  }), [content.images]);
+  }), []);
   
   // Handle divider position change
   const handleDividerChange = useCallback((category: string, index: number, position: number): void => {
@@ -196,7 +175,7 @@ const Examples: React.FC = () => {
                         className="max-w-16 max-h-16 object-contain"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
+                          target.src = "https://via.placeholder.com/64x64?text=Logo";
                         }}
                       />
                     </div>
@@ -207,33 +186,27 @@ const Examples: React.FC = () => {
                   <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
                       <img
-                        src="/assets/-a-modern-and-professional-logo-for--koronyo-studi.svg"
-                        alt="סטודיו קורוניו - לוגו"
-                        className="max-w-16 max-h-16 object-contain"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                        }}
-                      />
-                    </div>
-                    <h4 className="font-semibold text-sm text-center">סטודיו קורוניו</h4>
-                    <p className="text-xs text-gray-500 text-center">עיצוב ופיתוח</p>
-                  </div>
-                  
-                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
-                      <img
                         src="/assets/new hapoter logo transparent.png"
                         alt="הפותר - לוגו"
                         className="max-w-16 max-h-16 object-contain"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
+                          target.src = "https://via.placeholder.com/64x64?text=Logo";
                         }}
                       />
                     </div>
                     <h4 className="font-semibold text-sm text-center">הפותר</h4>
                     <p className="text-xs text-gray-500 text-center">שירותי עיצוב</p>
+                  </div>
+                  
+                  <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
+                      <div className="w-16 h-16 bg-gradient-to-br from-royal-500 to-coral-500 rounded-lg flex items-center justify-center">
+                        <span className="text-white font-bold text-xs">פרויקט</span>
+                      </div>
+                    </div>
+                    <h4 className="font-semibold text-sm text-center">פרויקט נוסף</h4>
+                    <p className="text-xs text-gray-500 text-center">בקרוב...</p>
                   </div>
                   
                   <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
@@ -278,9 +251,9 @@ const Examples: React.FC = () => {
                       <div className="relative w-full aspect-video overflow-hidden rounded-lg bg-gray-100">
                         <video 
                           controls
-                          preload="none"
+                          preload="metadata"
                           loading="lazy"
-                          poster={example.posterImage || example.before}
+                          poster={example.posterImage}
                           className="w-full h-full object-contain"
                           onError={(e) => {
                             const target = e.target as HTMLVideoElement;
