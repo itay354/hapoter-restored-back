@@ -43,18 +43,13 @@ const Examples: React.FC = () => {
         poster: "/assets/logo-with-mockup-garry.jpg"
       },
       {
-        videoUrl: "/assets/services/images-video/videos/regular%20model%20turns%20to%20video.mp4",
-        title: "הנפשת דוגמנית רגילה",
-        poster: "/assets/tanti%20model%20before.jpg"
-      },
-      {
         videoUrl: "/assets/services/images-video/videos/black%20model%20turned%20to%20video.mp4",
         title: "הנפשת דוגמנית כהת עור",
         poster: "/assets/services/images-video/examples/WhatsApp%20Image%202025-01-11%20at%2022.50.40_3e0b1e38.jpg"
       },
       {
         videoUrl: "/videos/doogmanit-video.mp4",
-        title: "הנפשת דוגמנית - הדגמה",
+        title: "הנפשת דוגמנית",
         poster: "/assets/tanti%20model%20after.jpg"
       },
       {
