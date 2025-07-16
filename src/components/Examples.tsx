@@ -7,7 +7,7 @@ const Examples: React.FC = () => {
   const [activeTab, setActiveTab] = useState('images');
   const [dividerPositions, setDividerPositions] = useState<{ [key: string]: number }>({});
   
-  // יצירת EXAMPLES_DATA עם קבצים שבוודאות קיימים
+  // קבצים בסיסיים שבוודאות קיימים (ללא רווחים)
   const EXAMPLES_DATA = useMemo(() => ({
     images: [
       {
@@ -17,7 +17,7 @@ const Examples: React.FC = () => {
       },
       {
         before: "/assets/Slide3.PNG",
-        after: "/assets/generated_image.png",
+        after: "/assets/image.png",
         title: "שיפור מצגת עסקית"
       },
       {
@@ -35,18 +35,10 @@ const Examples: React.FC = () => {
       {
         before: "/assets/logo-transparent-garry.svg",
         after: "/assets/logo-with-mockup-garry.jpg",
-        title: "פרסומת גארי גלינר",
+        title: "סרטון דוגמנית",
         type: "video",
         videoUrl: "/videos/doogmanit-video.mp4",
-        posterImage: "/assets/logo-with-mockup-garry.jpg"
-      },
-      {
-        before: "/assets/player.jpg",
-        after: "/assets/generated_image.png",
-        title: "סרטון עיבוד תמונות",
-        type: "video", 
-        videoUrl: "/videos/compressed-hapoter-video copy.mp4",
-        posterImage: "/assets/generated_image.png"
+        posterImage: "/assets/FB_IMG_1544304445964.jpg"
       }
     ],
     mockups: [
@@ -59,16 +51,6 @@ const Examples: React.FC = () => {
         before: "/assets/logo-transparent-garry.svg",
         after: "/assets/logo-with-mockup-garry.jpg",
         title: "עיצוב לוגו והטמעתו כמוקאפ"
-      },
-      {
-        before: "/assets/Slide3.PNG",
-        after: "/assets/generated_image.png",
-        title: "מצגת עסקית - מוקאפ מקצועי"
-      },
-      {
-        before: "/assets/FB_IMG_1544304445964.jpg",
-        after: "/assets/generated_image.png",
-        title: "עיבוד תמונה למוקאפ"
       }
     ],
     logos: []
@@ -90,12 +72,6 @@ const Examples: React.FC = () => {
 
   return (
     <section id="examples" className="py-16 md:py-24 bg-peach-100 relative overflow-hidden">
-      {/* Geometric elements */}
-      <div className="absolute top-0 left-0 w-full h-16 bg-royal-600 opacity-10"></div>
-      <div className="absolute bottom-0 right-0 w-full h-16 bg-coral-500 opacity-10"></div>
-      <div className="absolute top-40 left-10 w-32 h-32 bg-royal-600 rounded-full opacity-10"></div>
-      <div className="absolute bottom-40 right-10 w-32 h-32 bg-coral-500 rounded-full opacity-10"></div>
-      
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="text-coral-600 font-medium mb-2 block">הדוגמאות שלנו</span>
@@ -175,7 +151,7 @@ const Examples: React.FC = () => {
                         className="max-w-16 max-h-16 object-contain"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "https://via.placeholder.com/64x64?text=Logo";
+                          target.src = "/assets/generated_image.png";
                         }}
                       />
                     </div>
@@ -186,17 +162,17 @@ const Examples: React.FC = () => {
                   <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                     <div className="w-20 h-20 mb-3 flex items-center justify-center bg-white rounded-lg shadow-sm">
                       <img
-                        src="/assets/new hapoter logo transparent.png"
-                        alt="הפותר - לוגו"
+                        src="/assets/logo-with-mockup-garry.jpg"
+                        alt="מוקאפ גארי"
                         className="max-w-16 max-h-16 object-contain"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "https://via.placeholder.com/64x64?text=Logo";
+                          target.src = "/assets/generated_image.png";
                         }}
                       />
                     </div>
-                    <h4 className="font-semibold text-sm text-center">הפותר</h4>
-                    <p className="text-xs text-gray-500 text-center">שירותי עיצוב</p>
+                    <h4 className="font-semibold text-sm text-center">מוקאפ גארי</h4>
+                    <p className="text-xs text-gray-500 text-center">עיצוב מקצועי</p>
                   </div>
                   
                   <div className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
