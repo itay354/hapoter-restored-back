@@ -40,7 +40,7 @@ const Examples: React.FC = () => {
       {
         videoUrl: "/assets/services/images-video/videos/garry%20first%20video%20ad.mp4",
         title: "פרסומת גארי גלינר",
-        poster: "/assets/FB_IMG_1544304445964.jpg"
+        poster: "/assets/logo-with-mockup-garry.jpg"
       },
       {
         videoUrl: "/assets/services/images-video/videos/regular%20model%20turns%20to%20video.mp4",
@@ -55,12 +55,12 @@ const Examples: React.FC = () => {
       {
         videoUrl: "/videos/doogmanit-video.mp4",
         title: "הנפשת דוגמנית - הדגמה",
-        poster: "/assets/FB_IMG_1544304445964.jpg"
+        poster: "/assets/tanti%20model%20after.jpg"
       },
       {
         videoUrl: "/videos/compressed-hapoter-video%20copy.mp4",
         title: "הפותר בפעולה",
-        poster: "/assets/FB_IMG_1544304445964.jpg"
+        poster: "/assets/itay-koronio.jpg"
       }
     ],
     logos: [
