@@ -59,8 +59,8 @@ const Navbar: React.FC = () => {
              style={{background: 'radial-gradient(circle, rgba(255,92,74,0.2) 0%, rgba(255,92,74,0) 70%)'}}></div>
       </div>
       
-      <div className="container mx-auto px-4 flex items-center relative z-10">
-        <div className="flex items-center">
+      <div className="container mx-auto px-4 flex items-center justify-between relative z-10">
+        <div className="flex items-center flex-shrink-0">
           <a href="#" className="flex flex-col items-center justify-center group">
             <img 
               src="/assets/new hapoter logo transparent.png" 
@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
         </div>
         
         {/* Desktop Menu */}
-        <nav className="hidden lg:flex items-center space-x-6 space-x-reverse ml-auto">
+        <nav className="hidden lg:flex items-center space-x-6 space-x-reverse">
           <button 
             onClick={() => scrollToSection('about')}
             className="text-gray-700 hover:text-coral-500 transition-colors font-medium"
@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
         
         {/* Mobile Menu Button */}
         <button 
-          className="lg:hidden text-gray-700 ml-auto"
+          className="lg:hidden text-gray-700"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
