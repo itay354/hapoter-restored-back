@@ -60,20 +60,6 @@ const Navbar: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 flex items-center justify-between relative z-10">
-        <div className="flex items-center flex-shrink-0">
-          <a href="#" className="flex flex-col items-center justify-center group">
-            <img 
-              src="/assets/new hapoter logo transparent.png" 
-              alt="הפותר - לוגו" 
-              className="h-16 w-auto drop-shadow-sm transition-transform group-hover:scale-105"
-              onError={handleLogoError}
-            />
-            <div className="text-royal-600 text-sm font-bold mt-1 group-hover:text-coral-500 transition-colors">
-              הפותר
-            </div>
-          </a>
-        </div>
-        
         {/* Desktop Menu */}
         <nav className="hidden lg:flex items-center space-x-6 space-x-reverse">
           <button 
@@ -114,9 +100,23 @@ const Navbar: React.FC = () => {
           </button>
         </nav>
         
+        <div className="flex items-center flex-shrink-0">
+          <a href="#" className="flex flex-col items-center justify-center group">
+            <img 
+              src="/assets/new hapoter logo transparent.png" 
+              alt="הפותר - לוגו" 
+              className="h-16 w-auto drop-shadow-sm transition-transform group-hover:scale-105"
+              onError={handleLogoError}
+            />
+            <div className="text-royal-600 text-sm font-bold mt-1 group-hover:text-coral-500 transition-colors">
+              הפותר
+            </div>
+          </a>
+        </div>
+        
         {/* Mobile Menu Button */}
         <button 
-          className="lg:hidden text-gray-700"
+          className="lg:hidden text-gray-700 order-first"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
